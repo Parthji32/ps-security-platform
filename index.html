@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PS Security Platform - Deception Technology</title>
+    <title>PS — Deception Security Platform</title>
     <style>
         * {
             margin: 0;
@@ -13,14 +13,12 @@
 
         :root {
             --primary: #7C3AED;
-            --primary-hover: #8B5CF6;
             --cyan: #06B6D4;
             --pink: #EC4899;
             --dark-bg: #0A0A14;
             --dark-surface: #0D0B1A;
             --panel: #120E24;
             --border: rgba(124, 58, 237, 0.06);
-            --border-hover: rgba(6, 182, 212, 0.4);
             --grad: linear-gradient(120deg, #7C3AED, #06B6D4);
             --grad-tri: linear-gradient(120deg, #EC4899, #7C3AED, #06B6D4);
         }
@@ -28,12 +26,11 @@
         body {
             background: var(--dark-bg);
             color: #E0E7FF;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-            line-height: 1.6;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             overflow-x: hidden;
         }
 
-        /* Animated background orbs */
+        /* Background orbs */
         .bg-orbs {
             position: fixed;
             top: 0;
@@ -83,50 +80,52 @@
             50% { transform: translateY(-50px) translateX(30px); }
         }
 
-        /* Header */
+        /* Header - OVAL PILL */
         header {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
             z-index: 1000;
-            background: rgba(10, 10, 20, 0.7);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border);
-            padding: 1rem 2rem;
-        }
-
-        .header-container {
-            max-width: 1400px;
-            margin: 0 auto;
+            background: rgba(18, 14, 36, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(124, 58, 237, 0.2);
+            border-radius: 50px;
+            padding: 0.8rem 2rem;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            gap: 2rem;
+            gap: 2.5rem;
+            width: auto;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
         }
 
         .logo {
-            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            text-decoration: none;
             font-weight: 900;
+            font-size: 1.2rem;
+            white-space: nowrap;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--grad);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: white;
+        }
+
+        .logo-text {
             background: var(--grad);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-decoration: none;
-            white-space: nowrap;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .logo-mark {
-            font-size: 1.5rem;
-            animation: pulse-glow 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse-glow {
-            0%, 100% { filter: drop-shadow(0 0 10px rgba(124, 58, 237, 0.5)); }
-            50% { filter: drop-shadow(0 0 20px rgba(6, 182, 212, 0.5)); }
         }
 
         .nav {
@@ -135,70 +134,17 @@
             align-items: center;
         }
 
-        .nav a, .nav button {
+        .nav a {
             color: #E0E7FF;
             text-decoration: none;
             font-size: 0.9rem;
             font-weight: 500;
             transition: color 0.3s;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 0;
+            white-space: nowrap;
         }
 
-        .nav a:hover, .nav button:hover {
+        .nav a:hover {
             color: var(--cyan);
-        }
-
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
-
-        .dropdown-toggle {
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-        }
-
-        .dropdown-menu {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background: var(--panel);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            min-width: 180px;
-            padding: 0.5rem 0;
-            margin-top: 0.5rem;
-            display: none;
-            flex-direction: column;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-        }
-
-        .dropdown:hover .dropdown-menu {
-            display: flex;
-        }
-
-        .dropdown-menu a {
-            padding: 0.6rem 1rem;
-            color: #E0E7FF;
-            text-decoration: none;
-            transition: background 0.2s;
-            font-size: 0.9rem;
-        }
-
-        .dropdown-menu a:hover {
-            background: rgba(124, 58, 237, 0.1);
-            color: var(--cyan);
-        }
-
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            margin-left: auto;
         }
 
         .cta-btn {
@@ -206,10 +152,11 @@
             color: white;
             border: none;
             padding: 0.6rem 1.3rem;
-            border-radius: 6px;
+            border-radius: 20px;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             cursor: pointer;
+            white-space: nowrap;
             transition: transform 0.3s, filter 0.3s;
         }
 
@@ -220,40 +167,47 @@
 
         /* Main content */
         main {
-            margin-top: 70px;
             position: relative;
             z-index: 1;
+            padding-top: 120px;
         }
 
-        /* Hero section */
+        /* Hero */
         .hero {
-            padding: 5rem 2rem;
             text-align: center;
+            padding: 4rem 2rem;
             max-width: 900px;
             margin: 0 auto;
         }
 
         .flair {
-            display: inline-block;
-            background: rgba(124, 58, 237, 0.1);
-            border: 1px solid var(--border);
-            padding: 0.4rem 0.9rem;
-            border-radius: 50px;
-            font-size: 0.8rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(6, 182, 212, 0.1);
+            border: 1px solid rgba(6, 182, 212, 0.3);
             color: var(--cyan);
-            margin-bottom: 1.2rem;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
             font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .flair::before {
+            content: '●';
+            font-size: 1rem;
         }
 
         h1 {
-            font-size: 3.2rem;
+            font-size: 3.5rem;
             font-weight: 900;
             line-height: 1.1;
             margin-bottom: 1rem;
-            letter-spacing: -0.5px;
+            letter-spacing: -1px;
         }
 
-        .hero-grad-text {
+        .hero-highlight {
             background: var(--grad-tri);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -261,22 +215,67 @@
         }
 
         .hero-subtext {
-            font-size: 1.1rem;
-            color: #C7D2FE;
-            margin-bottom: 2rem;
+            color: #A5ACBE;
+            font-size: 1.05rem;
             max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
+            margin: 0 auto 2.5rem;
+            line-height: 1.6;
         }
 
-        /* Metrics section */
+        .hero-ctas {
+            display: flex;
+            gap: 1.2rem;
+            justify-content: center;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--grad);
+            color: white;
+            border: none;
+            padding: 0.9rem 2rem;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            filter: brightness(1.15);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #E0E7FF;
+            border: 1px solid rgba(224, 231, 255, 0.2);
+            padding: 0.9rem 2rem;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--cyan);
+            color: var(--cyan);
+        }
+
+        /* Metrics */
         .metrics {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 1.5rem;
-            margin: 3rem 0;
-            padding: 2rem;
-            background: rgba(18, 14, 36, 0.4);
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            padding: 3rem 2rem;
+            max-width: 1000px;
+            margin: 2rem auto;
+            background: rgba(18, 14, 36, 0.3);
             border: 1px solid var(--border);
             border-radius: 12px;
         }
@@ -300,38 +299,25 @@
             color: #A5ACBE;
         }
 
-        /* Products grid */
+        /* Products section */
         .products {
             padding: 4rem 2rem;
             max-width: 1200px;
             margin: 0 auto;
         }
 
-        .products h2 {
-            font-size: 1.8rem;
-            text-align: center;
-            margin-bottom: 0.5rem;
-            font-weight: 900;
-        }
-
-        .products-subtitle {
-            text-align: center;
-            color: #A5ACBE;
-            margin-bottom: 2.5rem;
-            font-size: 0.95rem;
-        }
-
-        .product-grid {
+        .products-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
+            margin-top: 2.5rem;
         }
 
         .product-card {
             background: linear-gradient(135deg, rgba(18, 14, 36, 0.8) 0%, rgba(18, 14, 36, 0.6) 100%);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 1.8rem;
+            border: 1px solid rgba(124, 58, 237, 0.1);
+            border-radius: 12px;
+            padding: 2rem;
             transition: all 0.3s;
             position: relative;
             overflow: hidden;
@@ -349,14 +335,14 @@
             transition: opacity 0.3s;
         }
 
-        .product-card:hover::before {
-            opacity: 1;
-        }
-
         .product-card:hover {
-            border-color: var(--border-hover);
+            border-color: rgba(6, 182, 212, 0.4);
             background: linear-gradient(135deg, rgba(18, 14, 36, 1) 0%, rgba(18, 14, 36, 0.8) 100%);
             transform: translateY(-5px);
+        }
+
+        .product-card:hover::before {
+            opacity: 1;
         }
 
         .product-status {
@@ -386,8 +372,8 @@
 
         .product-card p {
             color: #A5ACBE;
-            margin-bottom: 1.2rem;
             font-size: 0.95rem;
+            margin-bottom: 1.2rem;
         }
 
         .product-features {
@@ -398,10 +384,9 @@
         .product-features li {
             color: #A5ACBE;
             margin-bottom: 0.4rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
             font-size: 0.9rem;
+            display: flex;
+            gap: 0.5rem;
         }
 
         .product-features li::before {
@@ -415,36 +400,32 @@
             text-decoration: none;
             font-weight: 600;
             font-size: 0.9rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            transition: gap 0.3s;
         }
 
         .product-link:hover {
-            gap: 0.6rem;
+            text-decoration: underline;
         }
 
         /* Footer */
         footer {
-            background: rgba(18, 14, 36, 0.8);
+            background: rgba(18, 14, 36, 0.6);
             border-top: 1px solid var(--border);
             padding: 3rem 2rem;
-            margin-top: 3rem;
+            margin-top: 4rem;
         }
 
         .footer-container {
             max-width: 1200px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 2rem;
             margin-bottom: 2rem;
         }
 
         .footer-col h4 {
             color: var(--cyan);
-            margin-bottom: 0.8rem;
+            margin-bottom: 1rem;
             font-size: 0.85rem;
             font-weight: 700;
         }
@@ -471,32 +452,58 @@
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
-            .header-container {
-                flex-wrap: wrap;
-                gap: 1rem;
+        @media (max-width: 1024px) {
+            header {
+                padding: 0.7rem 1.5rem;
+                gap: 1.5rem;
             }
 
             .nav {
-                order: 3;
-                width: 100%;
+                gap: 1.2rem;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                top: 10px;
+                padding: 0.6rem 1rem;
                 gap: 1rem;
+            }
+
+            .logo {
+                gap: 0.3rem;
+            }
+
+            .nav {
+                display: none;
             }
 
             h1 {
                 font-size: 2rem;
             }
 
-            .hero {
-                padding: 3rem 1rem;
+            .hero-ctas {
+                flex-direction: column;
+                align-items: center;
             }
 
-            .product-grid {
-                grid-template-columns: 1fr;
+            .btn-primary, .btn-secondary {
+                width: 100%;
+                max-width: 300px;
             }
 
             .metrics {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+                padding: 1.5rem;
+            }
+
+            .product-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -510,44 +517,32 @@
 
     <!-- Header -->
     <header>
-        <div class="header-container">
-            <a href="/" class="logo">
-                <span class="logo-mark">🛡️</span>
-                <span>PS Security</span>
-            </a>
-
-            <nav class="nav">
-                <a href="/about.html">About</a>
-                <div class="dropdown">
-                    <button class="dropdown-toggle">Products ▼</button>
-                    <div class="dropdown-menu">
-                        <a href="#kavach-v1">Kavach v1 (LIVE)</a>
-                        <a href="#kavach-v2">Kavach v2 (In Development)</a>
-                        <a href="/dashboard.html">Dashboard</a>
-                    </div>
-                </div>
-                <a href="/docs.html">Docs</a>
-                <a href="/integrations.html">Integrations</a>
-                <a href="/faq.html">FAQ</a>
-            </nav>
-
-            <div class="nav-right">
-                <a href="/contact.html" style="color: #E0E7FF;">Contact</a>
-                <button class="cta-btn" onclick="window.location='/product.html'">Get Started</button>
-            </div>
-        </div>
+        <a href="/" class="logo">
+            <div class="logo-icon">🛡️</div>
+            <span class="logo-text">PS</span>
+        </a>
+        <nav class="nav">
+            <a href="#products">Products</a>
+            <a href="#vision">Vision</a>
+            <a href="#kavach">Kavach</a>
+        </nav>
+        <button class="cta-btn">Get Started</button>
     </header>
 
     <main>
         <!-- Hero -->
         <section class="hero">
-            <div class="flair">🚀 Building deception at scale</div>
+            <div class="flair">Building deception at scale</div>
             <h1>
-                <span class="hero-grad-text">Armor That Fights Back</span>
+                Armor that <span class="hero-highlight">fights back.</span>
             </h1>
             <p class="hero-subtext">
-                Turn your security team into a threat intelligence network. Detect attackers before they reach your critical assets.
+                PS builds deception security that turns attackers into data. Deploy Kavach, trap adversaries with invisible honeypots, and convert every breach attempt into forensic intelligence.
             </p>
+            <div class="hero-ctas">
+                <button class="btn-primary">Deploy Kavach Free 🚀</button>
+                <button class="btn-secondary">Watch Demo →</button>
+            </div>
         </section>
 
         <!-- Metrics -->
@@ -571,13 +566,11 @@
         </section>
 
         <!-- Products -->
-        <section class="products">
-            <h2>Our Platform</h2>
-            <p class="products-subtitle">Integrated deception technology for threat detection</p>
-
-            <div class="product-grid">
+        <section class="products" id="products">
+            <h2 style="font-size: 1.8rem; text-align: center; margin-bottom: 2.5rem;">Our Platform</h2>
+            <div class="products-grid">
                 <!-- Kavach v1 -->
-                <div class="product-card" id="kavach-v1">
+                <div class="product-card" id="kavach">
                     <span class="product-status">LIVE</span>
                     <h3>Kavach v1</h3>
                     <p>Multi-format canary tokens with real-time attacker fingerprinting.</p>
@@ -587,21 +580,21 @@
                         <li>Slack, Email, Webhook alerts</li>
                         <li>Correlation analysis</li>
                     </ul>
-                    <a href="/product.html#kavach-v1" class="product-link">Learn More →</a>
+                    <a href="/product.html" class="product-link">Learn More →</a>
                 </div>
 
                 <!-- Kavach v2 -->
-                <div class="product-card" id="kavach-v2">
+                <div class="product-card">
                     <span class="product-status ongoing">IN DEVELOPMENT</span>
                     <h3>Kavach v2</h3>
                     <p>ML-powered invisible reverse proxy with 5D traffic classification.</p>
                     <ul class="product-features">
-                        <li>5-dimensional traffic classifier</li>
+                        <li>5-dimensional traffic classifier (0-100 risk score)</li>
                         <li>Automatic routing (safe/suspicious/attacker)</li>
-                        <li>Full-stack honeypot</li>
+                        <li>Full-stack honeypot (website, API, services)</li>
                         <li>Docker Compose ready</li>
                     </ul>
-                    <a href="/product.html#kavach-v2" class="product-link">Learn More →</a>
+                    <a href="/product.html" class="product-link">Learn More →</a>
                 </div>
 
                 <!-- Dashboard -->
@@ -627,9 +620,8 @@
             <div class="footer-col">
                 <h4>Product</h4>
                 <a href="/product.html">Features</a>
-                <a href="/integrations.html">Integrations</a>
                 <a href="/docs.html">Documentation</a>
-                <a href="/faq.html">FAQ</a>
+                <a href="/integrations.html">Integrations</a>
             </div>
             <div class="footer-col">
                 <h4>Company</h4>
@@ -642,12 +634,6 @@
                 <a href="/privacy.html">Privacy Policy</a>
                 <a href="/terms.html">Terms of Service</a>
                 <a href="/security.html">Security</a>
-            </div>
-            <div class="footer-col">
-                <h4>Connect</h4>
-                <a href="https://twitter.com">Twitter</a>
-                <a href="https://linkedin.com">LinkedIn</a>
-                <a href="mailto:hello@ps-security.io">Email</a>
             </div>
         </div>
         <div class="footer-bottom">
