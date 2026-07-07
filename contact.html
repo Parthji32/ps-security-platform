@@ -19,6 +19,8 @@
             --panel: #120E24;
             --border: rgba(124, 58, 237, 0.06);
             --grad: linear-gradient(120deg, #7C3AED, #06B6D4);
+            --error: #F87171;
+            --success: #34D399;
         }
 
         body {
@@ -74,6 +76,22 @@
             display: flex;
             align-items: center;
             gap: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease, top 0.4s ease, padding 0.4s ease;
+            animation: headerDrop 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        @keyframes headerDrop {
+            0% { transform: translateX(-50%) translateY(-30px); opacity: 0; }
+            100% { transform: translateX(-50%) translateY(0); opacity: 1; }
+        }
+
+        header.scrolled {
+            top: 12px;
+            padding: 0.6rem 1.8rem;
+            background: rgba(18, 14, 36, 0.92);
+            border-color: rgba(6, 182, 212, 0.35);
+            box-shadow: 0 10px 40px rgba(124, 58, 237, 0.28);
         }
 
         .logo {
@@ -83,6 +101,11 @@
             text-decoration: none;
             font-weight: 900;
             font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.04);
         }
 
         .logo-icon {
@@ -94,6 +117,12 @@
             align-items: center;
             justify-content: center;
             color: white;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .logo:hover .logo-icon {
+            transform: rotate(-8deg) scale(1.08);
+            box-shadow: 0 0 16px rgba(124, 58, 237, 0.6);
         }
 
         .logo-text {
@@ -113,6 +142,24 @@
             text-decoration: none;
             font-size: 0.85rem;
             transition: color 0.3s;
+            position: relative;
+            padding-bottom: 2px;
+        }
+
+        .nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            width: 0;
+            height: 2px;
+            background: var(--grad);
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        .nav a:hover::after {
+            width: 100%;
         }
 
         .nav a:hover {
@@ -152,6 +199,13 @@
             border-radius: 10px;
             padding: 1.5rem;
             text-align: center;
+            transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(6, 182, 212, 0.4);
+            box-shadow: 0 14px 32px rgba(0, 0, 0, 0.35);
         }
 
         .contact-card h3 {
@@ -185,6 +239,7 @@
 
         .form-group {
             margin-bottom: 1.5rem;
+            position: relative;
         }
 
         label {
@@ -202,11 +257,14 @@
             color: #E0E7FF;
             border-radius: 6px;
             font-family: inherit;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
         }
 
         input:focus, textarea:focus {
             outline: none;
             border-color: var(--cyan);
+            box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.15);
+            background: rgba(18, 14, 36, 0.95);
         }
 
         textarea {
@@ -214,18 +272,117 @@
             min-height: 120px;
         }
 
+        /* Validation states */
+        .form-group.invalid input,
+        .form-group.invalid textarea {
+            border-color: var(--error);
+            box-shadow: 0 0 0 3px rgba(248, 113, 113, 0.12);
+        }
+
+        .form-group.valid input,
+        .form-group.valid textarea {
+            border-color: var(--success);
+        }
+
+        .field-error {
+            color: var(--error);
+            font-size: 0.78rem;
+            margin-top: 0.4rem;
+            min-height: 1rem;
+            opacity: 0;
+            transform: translateY(-4px);
+            transition: opacity 0.25s ease, transform 0.25s ease;
+        }
+
+        .form-group.invalid .field-error {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20% { transform: translateX(-6px); }
+            40% { transform: translateX(6px); }
+            60% { transform: translateX(-4px); }
+            80% { transform: translateX(4px); }
+        }
+
+        .form-group.shake input,
+        .form-group.shake textarea {
+            animation: shake 0.4s ease;
+        }
+
         .submit-btn {
             background: var(--grad);
+            background-size: 150% auto;
             color: white;
             border: none;
             padding: 0.8rem 2rem;
             border-radius: 6px;
             font-weight: 600;
             cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, filter 0.3s ease, box-shadow 0.3s ease, background-position 0.4s ease;
+            box-shadow: 0 4px 16px rgba(124, 58, 237, 0.3);
+        }
+
+        .submit-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -120%;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+            transform: skewX(-20deg);
+            transition: left 0.6s ease;
         }
 
         .submit-btn:hover {
             filter: brightness(1.1);
+            transform: translateY(-2px);
+            background-position: right center;
+            box-shadow: 0 8px 24px rgba(124, 58, 237, 0.45);
+        }
+
+        .submit-btn:hover::after {
+            left: 130%;
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .form-success {
+            display: none;
+            align-items: center;
+            gap: 0.6rem;
+            margin-top: 1.2rem;
+            padding: 0.9rem 1rem;
+            border-radius: 8px;
+            background: rgba(52, 211, 153, 0.12);
+            border: 1px solid rgba(52, 211, 153, 0.4);
+            color: var(--success);
+            font-size: 0.9rem;
+            opacity: 0;
+            transform: translateY(8px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        .form-success.show {
+            display: flex;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.001s !important;
+                transition-duration: 0.001s !important;
+            }
         }
 
         footer {
@@ -245,7 +402,7 @@
         <div class="orb orb-2"></div>
     </div>
 
-    <header>
+    <header id="site-header">
         <a href="/" class="logo">
             <div class="logo-icon">🛡️</div>
             <span class="logo-text">PS</span>
@@ -285,24 +442,29 @@
 
         <div class="contact-form">
             <h2 style="color: var(--cyan); margin-bottom: 1.5rem;">Send us a Message</h2>
-            <form>
+            <form id="contact-form" novalidate>
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input type="text" id="name" required>
+                    <input type="text" id="name" name="name" required>
+                    <div class="field-error" data-for="name"></div>
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" id="email" required>
+                    <input type="email" id="email" name="email" required>
+                    <div class="field-error" data-for="email"></div>
                 </div>
                 <div class="form-group">
                     <label for="subject">Subject</label>
-                    <input type="text" id="subject" required>
+                    <input type="text" id="subject" name="subject" required>
+                    <div class="field-error" data-for="subject"></div>
                 </div>
                 <div class="form-group">
                     <label for="message">Message</label>
-                    <textarea id="message" required></textarea>
+                    <textarea id="message" name="message" required></textarea>
+                    <div class="field-error" data-for="message"></div>
                 </div>
                 <button type="submit" class="submit-btn">Send Message</button>
+                <div class="form-success" id="form-success">✅ Thanks! Your message has been sent — we'll get back to you soon.</div>
             </form>
         </div>
     </main>
@@ -310,5 +472,130 @@
     <footer>
         <p>&copy; 2026 PS Security Platform. Built with deception. Protect with intelligence.</p>
     </footer>
+
+    <script>
+        // Header pill: compact/elevated on scroll
+        (function () {
+            var header = document.getElementById('site-header');
+            function onScroll() {
+                if (window.scrollY > 30) header.classList.add('scrolled');
+                else header.classList.remove('scrolled');
+            }
+            window.addEventListener('scroll', onScroll, { passive: true });
+            onScroll();
+        })();
+
+        // Contact form validation + micro-interactions
+        (function () {
+            var form = document.getElementById('contact-form');
+            var successBox = document.getElementById('form-success');
+            if (!form) return;
+
+            var rules = {
+                name: function (v) {
+                    if (!v.trim()) return 'Please enter your name.';
+                    if (v.trim().length < 2) return 'Name must be at least 2 characters.';
+                    return '';
+                },
+                email: function (v) {
+                    if (!v.trim()) return 'Please enter your email.';
+                    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim())) return 'Please enter a valid email address.';
+                    return '';
+                },
+                subject: function (v) {
+                    if (!v.trim()) return 'Please enter a subject.';
+                    if (v.trim().length < 3) return 'Subject must be at least 3 characters.';
+                    return '';
+                },
+                message: function (v) {
+                    if (!v.trim()) return 'Please enter a message.';
+                    if (v.trim().length < 10) return 'Message must be at least 10 characters.';
+                    return '';
+                }
+            };
+
+            function fieldGroup(input) {
+                return input.closest('.form-group');
+            }
+
+            function errorEl(name) {
+                return form.querySelector('.field-error[data-for="' + name + '"]');
+            }
+
+            function validateField(input, opts) {
+                opts = opts || {};
+                var name = input.name;
+                if (!rules[name]) return true;
+                var msg = rules[name](input.value);
+                var group = fieldGroup(input);
+                var err = errorEl(name);
+                if (msg) {
+                    group.classList.add('invalid');
+                    group.classList.remove('valid');
+                    if (err) err.textContent = msg;
+                    if (opts.shake) {
+                        group.classList.remove('shake');
+                        void group.offsetWidth; // reflow to restart animation
+                        group.classList.add('shake');
+                    }
+                    return false;
+                } else {
+                    group.classList.remove('invalid');
+                    group.classList.add('valid');
+                    if (err) err.textContent = '';
+                    return true;
+                }
+            }
+
+            var fields = ['name', 'email', 'subject', 'message'].map(function (id) {
+                return form.querySelector('#' + id);
+            });
+
+            fields.forEach(function (input) {
+                if (!input) return;
+                // Validate live once the field has been touched
+                input.addEventListener('blur', function () { validateField(input); });
+                input.addEventListener('input', function () {
+                    if (fieldGroup(input).classList.contains('invalid') ||
+                        fieldGroup(input).classList.contains('valid')) {
+                        validateField(input);
+                    }
+                });
+            });
+
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                var allValid = true;
+                var firstInvalid = null;
+                fields.forEach(function (input) {
+                    if (!input) return;
+                    var ok = validateField(input, { shake: true });
+                    if (!ok && !firstInvalid) firstInvalid = input;
+                    if (!ok) allValid = false;
+                });
+
+                if (!allValid) {
+                    successBox.classList.remove('show');
+                    if (firstInvalid) firstInvalid.focus();
+                    return;
+                }
+
+                // Simulate a successful submission with a brief loading state
+                var btn = form.querySelector('.submit-btn');
+                var originalText = btn.textContent;
+                btn.disabled = true;
+                btn.textContent = 'Sending…';
+                setTimeout(function () {
+                    btn.disabled = false;
+                    btn.textContent = originalText;
+                    successBox.classList.add('show');
+                    form.reset();
+                    fields.forEach(function (input) {
+                        if (input) fieldGroup(input).classList.remove('valid', 'invalid');
+                    });
+                }, 900);
+            });
+        })();
+    </script>
 </body>
 </html>

@@ -97,6 +97,22 @@
             gap: 2.5rem;
             width: auto;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease, top 0.4s ease, padding 0.4s ease;
+            animation: headerDrop 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        @keyframes headerDrop {
+            0% { transform: translateX(-50%) translateY(-30px); opacity: 0; }
+            100% { transform: translateX(-50%) translateY(0); opacity: 1; }
+        }
+
+        /* Compact / elevated state once the user scrolls */
+        header.scrolled {
+            top: 12px;
+            padding: 0.6rem 1.8rem;
+            background: rgba(18, 14, 36, 0.92);
+            border-color: rgba(6, 182, 212, 0.35);
+            box-shadow: 0 10px 40px rgba(124, 58, 237, 0.28);
         }
 
         .logo {
@@ -107,6 +123,11 @@
             font-weight: 900;
             font-size: 1.2rem;
             white-space: nowrap;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.04);
         }
 
         .logo-icon {
@@ -119,6 +140,12 @@
             justify-content: center;
             font-size: 1.2rem;
             color: white;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .logo:hover .logo-icon {
+            transform: rotate(-8deg) scale(1.08);
+            box-shadow: 0 0 16px rgba(124, 58, 237, 0.6);
         }
 
         .logo-text {
@@ -141,6 +168,24 @@
             font-weight: 500;
             transition: color 0.3s;
             white-space: nowrap;
+            position: relative;
+            padding-bottom: 2px;
+        }
+
+        .nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            width: 0;
+            height: 2px;
+            background: var(--grad);
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        .nav a:hover::after {
+            width: 100%;
         }
 
         .nav a:hover {
@@ -157,12 +202,13 @@
             font-size: 0.85rem;
             cursor: pointer;
             white-space: nowrap;
-            transition: transform 0.3s, filter 0.3s;
+            transition: transform 0.3s, filter 0.3s, box-shadow 0.3s;
         }
 
         .cta-btn:hover {
             transform: translateY(-2px);
             filter: brightness(1.1);
+            box-shadow: 0 6px 20px rgba(124, 58, 237, 0.45);
         }
 
         /* Main content */
@@ -192,11 +238,18 @@
             font-size: 0.85rem;
             font-weight: 600;
             margin-bottom: 1.5rem;
+            animation: fadeUp 0.8s ease both;
         }
 
         .flair::before {
             content: '●';
             font-size: 1rem;
+            animation: pulseDot 2s ease-in-out infinite;
+        }
+
+        @keyframes pulseDot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.8); }
         }
 
         h1 {
@@ -205,13 +258,22 @@
             line-height: 1.1;
             margin-bottom: 1rem;
             letter-spacing: -1px;
+            animation: fadeUp 0.8s ease 0.1s both;
         }
 
         .hero-highlight {
             background: var(--grad-tri);
+            background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            animation: gradientShift 6s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% center; }
+            50% { background-position: 100% center; }
+            100% { background-position: 0% center; }
         }
 
         .hero-subtext {
@@ -220,6 +282,7 @@
             max-width: 700px;
             margin: 0 auto 2.5rem;
             line-height: 1.6;
+            animation: fadeUp 0.8s ease 0.2s both;
         }
 
         .hero-ctas {
@@ -228,10 +291,17 @@
             justify-content: center;
             margin-bottom: 3rem;
             flex-wrap: wrap;
+            animation: fadeUp 0.8s ease 0.3s both;
+        }
+
+        @keyframes fadeUp {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
 
         .btn-primary {
             background: var(--grad);
+            background-size: 150% auto;
             color: white;
             border: none;
             padding: 0.9rem 2rem;
@@ -243,11 +313,32 @@
             align-items: center;
             gap: 0.5rem;
             transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 18px rgba(124, 58, 237, 0.35);
+        }
+
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -120%;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+            transform: skewX(-20deg);
+            transition: left 0.6s ease;
         }
 
         .btn-primary:hover {
             transform: translateY(-3px);
             filter: brightness(1.15);
+            background-position: right center;
+            box-shadow: 0 10px 28px rgba(124, 58, 237, 0.5);
+        }
+
+        .btn-primary:hover::after {
+            left: 130%;
         }
 
         .btn-secondary {
@@ -265,6 +356,8 @@
         .btn-secondary:hover {
             border-color: var(--cyan);
             color: var(--cyan);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 22px rgba(6, 182, 212, 0.2);
         }
 
         /* Metrics */
@@ -278,10 +371,28 @@
             background: rgba(18, 14, 36, 0.3);
             border: 1px solid var(--border);
             border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metrics::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--grad-tri);
+            opacity: 0.5;
         }
 
         .metric {
             text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .metric:hover {
+            transform: translateY(-4px);
         }
 
         .metric-value {
@@ -292,6 +403,11 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             margin-bottom: 0.3rem;
+            transition: filter 0.3s ease;
+        }
+
+        .metric:hover .metric-value {
+            filter: brightness(1.25) drop-shadow(0 0 10px rgba(6, 182, 212, 0.4));
         }
 
         .metric-label {
@@ -318,7 +434,7 @@
             border: 1px solid rgba(124, 58, 237, 0.1);
             border-radius: 12px;
             padding: 2rem;
-            transition: all 0.3s;
+            transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
             position: relative;
             overflow: hidden;
         }
@@ -335,13 +451,32 @@
             transition: opacity 0.3s;
         }
 
+        /* Subtle glow that follows the hover */
+        .product-card::after {
+            content: '';
+            position: absolute;
+            top: -40%;
+            right: -40%;
+            width: 220px;
+            height: 220px;
+            background: radial-gradient(circle, rgba(6, 182, 212, 0.18), transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+        }
+
         .product-card:hover {
             border-color: rgba(6, 182, 212, 0.4);
             background: linear-gradient(135deg, rgba(18, 14, 36, 1) 0%, rgba(18, 14, 36, 0.8) 100%);
-            transform: translateY(-5px);
+            transform: translateY(-8px);
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
         }
 
         .product-card:hover::before {
+            opacity: 1;
+        }
+
+        .product-card:hover::after {
             opacity: 1;
         }
 
@@ -387,12 +522,26 @@
             font-size: 0.9rem;
             display: flex;
             gap: 0.5rem;
+            transition: color 0.25s ease, transform 0.25s ease;
+        }
+
+        .product-card:hover .product-features li {
+            color: #C7CEDE;
         }
 
         .product-features li::before {
             content: '✓';
             color: var(--cyan);
             font-weight: bold;
+            transition: transform 0.25s ease;
+        }
+
+        .product-features li:hover {
+            transform: translateX(4px);
+        }
+
+        .product-features li:hover::before {
+            transform: scale(1.25);
         }
 
         .product-link {
@@ -400,10 +549,23 @@
             text-decoration: none;
             font-weight: 600;
             font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            transition: gap 0.3s ease, color 0.3s ease;
+        }
+
+        .product-link .arrow {
+            transition: transform 0.3s ease;
+            display: inline-block;
         }
 
         .product-link:hover {
             text-decoration: underline;
+        }
+
+        .product-link:hover .arrow {
+            transform: translateX(5px);
         }
 
         /* Footer */
@@ -449,6 +611,27 @@
             padding-top: 1.5rem;
             color: #6B7280;
             font-size: 0.85rem;
+        }
+
+        /* Scroll reveal helper */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.001s !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.001s !important;
+            }
+            .reveal { opacity: 1; transform: none; }
         }
 
         /* Responsive */
@@ -516,7 +699,7 @@
     </div>
 
     <!-- Header -->
-    <header>
+    <header id="site-header">
         <a href="/" class="logo">
             <div class="logo-icon">🛡️</div>
             <span class="logo-text">PS</span>
@@ -547,13 +730,13 @@
         </section>
 
         <!-- Metrics -->
-        <section class="metrics">
+        <section class="metrics reveal">
             <div class="metric">
-                <div class="metric-value">3,847</div>
+                <div class="metric-value" data-count="3847">3,847</div>
                 <div class="metric-label">Attacks Blocked</div>
             </div>
             <div class="metric">
-                <div class="metric-value">342</div>
+                <div class="metric-value" data-count="342">342</div>
                 <div class="metric-label">Honeypots Active</div>
             </div>
             <div class="metric">
@@ -571,7 +754,7 @@
             <h2 style="font-size: 1.8rem; text-align: center; margin-bottom: 2.5rem;">Our Platform</h2>
             <div class="products-grid">
                 <!-- Kavach v1 -->
-                <div class="product-card" id="kavach">
+                <div class="product-card reveal" id="kavach">
                     <span class="product-status">LIVE</span>
                     <h3>Kavach v1</h3>
                     <p>Multi-format canary tokens with real-time attacker fingerprinting.</p>
@@ -581,11 +764,11 @@
                         <li>Slack, Email, Webhook alerts</li>
                         <li>Correlation analysis</li>
                     </ul>
-                    <a href="/product.html" class="product-link">Learn More →</a>
+                    <a href="/product.html" class="product-link">Learn More <span class="arrow">→</span></a>
                 </div>
 
                 <!-- Kavach v2 -->
-                <div class="product-card">
+                <div class="product-card reveal">
                     <span class="product-status ongoing">IN DEVELOPMENT</span>
                     <h3>Kavach v2</h3>
                     <p>ML-powered invisible reverse proxy with 5D traffic classification.</p>
@@ -595,11 +778,11 @@
                         <li>Full-stack honeypot (website, API, services)</li>
                         <li>Docker Compose ready</li>
                     </ul>
-                    <a href="/product.html" class="product-link">Learn More →</a>
+                    <a href="/product.html" class="product-link">Learn More <span class="arrow">→</span></a>
                 </div>
 
                 <!-- Dashboard -->
-                <div class="product-card">
+                <div class="product-card reveal">
                     <span class="product-status">COMING SOON</span>
                     <h3>Control Center</h3>
                     <p>Centralized dashboard for managing honeypots and threat intelligence.</p>
@@ -609,7 +792,7 @@
                         <li>Attacker profiles & TTPs</li>
                         <li>One-click threat response</li>
                     </ul>
-                    <a href="/dashboard.html" class="product-link">View Demo →</a>
+                    <a href="/dashboard.html" class="product-link">View Demo <span class="arrow">→</span></a>
                 </div>
             </div>
         </section>
@@ -648,5 +831,68 @@
             <p>&copy; 2026 PS Security Platform. Built with deception. Protect with intelligence.</p>
         </div>
     </footer>
+
+    <script>
+        // Header pill: compact/elevated on scroll
+        (function () {
+            var header = document.getElementById('site-header');
+            function onScroll() {
+                if (window.scrollY > 30) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            }
+            window.addEventListener('scroll', onScroll, { passive: true });
+            onScroll();
+        })();
+
+        // Scroll-reveal for metrics + product cards
+        (function () {
+            var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            var items = document.querySelectorAll('.reveal');
+            if (reduce || !('IntersectionObserver' in window)) {
+                items.forEach(function (el) { el.classList.add('visible'); });
+                return;
+            }
+            var io = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry, i) {
+                    if (entry.isIntersecting) {
+                        var el = entry.target;
+                        setTimeout(function () { el.classList.add('visible'); }, i * 90);
+                        io.unobserve(el);
+                    }
+                });
+            }, { threshold: 0.15 });
+            items.forEach(function (el) { io.observe(el); });
+        })();
+
+        // Count-up animation for numeric metrics
+        (function () {
+            var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            var counters = document.querySelectorAll('.metric-value[data-count]');
+            if (reduce || !('IntersectionObserver' in window)) return;
+            var io = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (!entry.isIntersecting) return;
+                    var el = entry.target;
+                    var target = parseInt(el.getAttribute('data-count'), 10);
+                    var start = null;
+                    var duration = 1400;
+                    function step(ts) {
+                        if (!start) start = ts;
+                        var progress = Math.min((ts - start) / duration, 1);
+                        var eased = 1 - Math.pow(1 - progress, 3);
+                        el.textContent = Math.floor(eased * target).toLocaleString('en-US');
+                        if (progress < 1) requestAnimationFrame(step);
+                        else el.textContent = target.toLocaleString('en-US');
+                    }
+                    requestAnimationFrame(step);
+                    io.unobserve(el);
+                });
+            }, { threshold: 0.5 });
+            counters.forEach(function (el) { io.observe(el); });
+        })();
+    </script>
 </body>
 </html>
