@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0A0A14">
+<title>PS — Deception Security Platform</title>
+<meta name="description" content="PS builds deception security that turns attackers into data. Deploy Kavach, trap adversaries with invisible honeypots.">
+<style>
+:root{
+  --primary:#7C3AED; --primary-hover:#8B5CF6; --cyan:#06B6D4; --pink:#EC4899;
+  --dark-bg:#0A0A14; --dark-surface:#0D0B1A; --panel:#120E24;
+  --border:rgba(124,58,237,0.14); --border-hover:rgba(6,182,212,0.4);
+  --text-primary:#F8FAFC; --text-secondary:#cbd5e1; --text-muted:#6b7280;
+  --grad:linear-gradient(120deg,#7C3AED,#06B6D4);
+  --grad-tri:linear-gradient(120deg,#EC4899,#7C3AED,#06B6D4);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html{overflow-x:hidden;scroll-behavior:smooth;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',sans-serif;background:var(--dark-bg);color:var(--text-secondary);overflow-x:hidden;line-height:1.55;}
+a{text-decoration:none;color:inherit;}
+section{scroll-margin-top:100px;}
+.wrap{max-width:1240px;margin:0 auto;padding:0 40px;}
+
+/* ANIMATED BACKGROUND ORBS */
+.bg-orbs{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;}
+.orb{position:absolute;border-radius:50%;filter:blur(90px);opacity:0.4;animation:float 18s ease-in-out infinite;}
+.orb.o1{width:480px;height:480px;background:#7C3AED;top:-120px;left:-100px;}
+.orb.o2{width:420px;height:420px;background:#06B6D4;top:40%;right:-120px;animation-delay:-6s;}
+.orb.o3{width:360px;height:360px;background:#EC4899;bottom:-100px;left:30%;animation-delay:-12s;opacity:0.25;}
+@keyframes float{0%,100%{transform:translate(0,0) scale(1);}33%{transform:translate(60px,-40px) scale(1.1);}66%{transform:translate(-40px,50px) scale(0.95);}}
+.content{position:relative;z-index:1;}
+
+/* FLOATING PILL NAV */
+nav{position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:200;width:calc(100% - 40px);max-width:1100px;}
+.nav-inner{display:flex;align-items:center;gap:20px;background:rgba(18,14,36,0.72);backdrop-filter:blur(18px);border:1px solid var(--border);border-radius:100px;padding:10px 14px 10px 22px;box-shadow:0 12px 40px rgba(0,0,0,.5);}
+.nav-logo{font-size:19px;font-weight:900;letter-spacing:-0.04em;display:flex;align-items:center;gap:9px;}
+.logo-mark{width:24px;height:24px;border-radius:8px;background:var(--grad-tri);box-shadow:0 0 18px rgba(124,58,237,.6);animation:pulse 3s ease-in-out infinite;}
+@keyframes pulse{0%,100%{box-shadow:0 0 18px rgba(124,58,237,.6);}50%{box-shadow:0 0 28px rgba(6,182,212,.7);}}
+.nav-logo .ps{color:var(--text-primary);}
+.nav-links{display:flex;gap:6px;margin-left:auto;list-style:none;}
+.nav-links a{font-size:13px;font-weight:600;color:var(--text-muted);padding:8px 16px;border-radius:100px;transition:all .2s;}
+.nav-links a:hover{color:var(--text-primary);background:rgba(124,58,237,0.16);}
+.nav-cta{padding:10px 22px;border-radius:100px;font-size:13px;font-weight:700;background:var(--grad);color:#fff;border:none;cursor:pointer;transition:all .2s;white-space:nowrap;}
+.nav-cta:hover{transform:scale(1.05);box-shadow:0 0 24px rgba(6,182,212,.5);}
+
+/* REVEAL ON SCROLL */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);}
+.reveal.in{opacity:1;transform:none;}
+
+/* HERO */
+.hero{padding:180px 0 90px;text-align:center;position:relative;}
+.hero .flair{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;color:var(--cyan);background:rgba(6,182,212,0.10);border:1px solid rgba(6,182,212,0.3);padding:7px 18px;border-radius:100px;margin-bottom:28px;animation:blink 2s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.6;}}
+.hero .flair .live-dot{width:7px;height:7px;border-radius:50%;background:var(--cyan);box-shadow:0 0 8px var(--cyan);}
+.hero h1{font-size:76px;font-weight:900;line-height:1.02;letter-spacing:-0.05em;color:var(--text-primary);margin-bottom:24px;}
+.hero h1 .grad{background:var(--grad-tri);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shine 5s linear infinite;}
+@keyframes shine{to{background-position:200% center;}}
+.hero p.lead{font-size:20px;color:var(--text-secondary);max-width:620px;margin:0 auto 40px;}
+.hero-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+.btn-primary{padding:16px 36px;border-radius:100px;font-size:15px;font-weight:700;background:var(--grad);color:#fff;border:none;cursor:pointer;transition:all .25s;position:relative;overflow:hidden;}
+.btn-primary::after{content:'';position:absolute;inset:0;background:var(--grad-tri);opacity:0;transition:opacity .25s;}
+.btn-primary span{position:relative;z-index:1;}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 14px 40px rgba(124,58,237,.5);}
+.btn-primary:hover::after{opacity:1;}
+.btn-ghost{padding:16px 36px;border-radius:100px;font-size:15px;font-weight:700;color:var(--text-primary);background:rgba(255,255,255,0.03);border:1px solid var(--border);cursor:pointer;transition:all .25s;}
+.btn-ghost:hover{border-color:var(--cyan);background:rgba(6,182,212,0.08);transform:translateY(-3px);}
+
+/* SECTION STYLES */
+.section{padding:100px 0;position:relative;}
+.sec-head{text-align:center;max-width:680px;margin:0 auto 64px;}
+.tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:16px;}
+.sec-head h2{font-size:48px;font-weight:900;letter-spacing:-0.04em;color:var(--text-primary);line-height:1.08;margin-bottom:16px;}
+.sec-head h2 .grad{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.sec-head p{font-size:17px;color:var(--text-muted);}
+
+/* PRODUCTS GRID */
+.products{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:64px;}
+.prod{background:var(--panel);border:1px solid var(--border);border-radius:24px;padding:40px;transition:all .3s;position:relative;overflow:hidden;}
+.prod:hover{transform:translateY(-8px);border-color:var(--cyan);box-shadow:0 30px 60px rgba(6,182,212,0.15);}
+.prod h3{font-size:20px;font-weight:900;color:var(--text-primary);margin-bottom:8px;}
+.prod .p-tag{font-size:13px;color:var(--cyan);font-weight:600;margin-bottom:16px;}
+.prod p{font-size:15px;color:var(--text-muted);margin-bottom:24px;}
+.prod ul{list-style:none;}
+.prod li{font-size:14px;color:var(--text-secondary);padding:8px 0;display:flex;gap:10px;}
+.prod li::before{content:'✓';color:var(--cyan);font-weight:900;}
+.p-cta{display:inline-block;margin-top:24px;font-size:14px;font-weight:700;color:var(--cyan);transition:all .2s;}
+.p-cta:hover{transform:translateX(4px);}
+
+/* STATS */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:80px;}
+.stat{text-align:center;padding:34px 16px;border:1px solid var(--border);border-radius:20px;background:var(--panel);transition:all .3s;}
+.stat:hover{transform:translateY(-8px) scale(1.02);border-color:var(--border-hover);box-shadow:0 20px 50px rgba(6,182,212,.12);}
+.stat .num{font-size:44px;font-weight:900;background:var(--grad-tri);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-0.04em;}
+.stat .cap{font-size:13px;color:var(--text-muted);margin-top:6px;}
+
+/* CTA SECTION */
+.cta-section{background:linear-gradient(135deg,rgba(124,58,237,0.1),rgba(6,182,212,0.05));border:1px solid var(--border);border-radius:24px;padding:64px 40px;text-align:center;}
+.cta-section h2{font-size:42px;font-weight:900;color:var(--text-primary);margin-bottom:16px;}
+.cta-section p{font-size:18px;color:var(--text-muted);max-width:600px;margin:0 auto 32px;}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);margin-top:120px;padding:40px 0;}
+.footer-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;margin-bottom:32px;}
+.footer-col h4{font-size:14px;font-weight:900;color:var(--text-primary);margin-bottom:16px;}
+.footer-col a{display:block;font-size:13px;color:var(--text-muted);margin-bottom:10px;transition:color .2s;}
+.footer-col a:hover{color:var(--text-primary);}
+.footer-bottom{border-top:1px solid var(--border);padding-top:24px;display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--text-muted);}
+</style>
+</head>
+<body>
+  <div class="bg-orbs">
+    <div class="orb o1"></div>
+    <div class="orb o2"></div>
+    <div class="orb o3"></div>
+  </div>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <div class="nav-inner">
+      <div class="nav-logo">
+        <div class="logo-mark">🛡️</div>
+        <span class="ps">PS</span>
+      </div>
+      <div class="nav-links">
+        <a href="#products">Products</a>
+        <a href="#vision">Vision</a>
+        <a href="kavach-product-page-unified.html">Kavach</a>
+      </div>
+      <button class="nav-cta">Get Started</button>
+    </div>
+  </nav>
+
+  <div class="content">
+    <!-- HERO SECTION -->
+    <section class="hero">
+      <div class="wrap">
+        <div class="flair">
+          <span class="live-dot"></span>
+          Building deception at scale
+        </div>
+        <h1>Armor that<br><span class="grad">fights back.</span></h1>
+        <p class="lead">PS builds deception security that turns attackers into data. Deploy Kavach, trap adversaries with invisible honeypots, and convert every breach attempt into forensic intelligence.</p>
+        <div class="hero-btns">
+          <button class="btn-primary"><span>Deploy Kavach Free ⚡</span></button>
+          <button class="btn-ghost">Watch Demo →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRODUCTS SECTION -->
+    <section class="section" id="products">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <span class="tag">The Arsenal</span>
+          <h2>Real Products. <span class="grad">Real Detection.</span></h2>
+          <p>Kavach v1 is live today. Kavach v2 (ML reverse proxy) is in development — same vision, more coverage.</p>
+        </div>
+        <div class="products reveal">
+          <div class="prod">
+            <h3>Kavach</h3>
+            <div class="p-tag">Canary Tokens & Fingerprinting</div>
+            <p>Deploy multi-format tokens everywhere—URLs, documents, API keys, DNS, email. When attackers use them, Kavach captures their fingerprint.</p>
+            <ul>
+              <li>Multi-format tokens</li>
+              <li>Real-time fingerprinting</li>
+              <li>Slack / Email alerts</li>
+              <li>Attacker correlation</li>
+              <li>Demo mode (no DB)</li>
+            </ul>
+            <a href="kavach-product-page-unified.html" class="p-cta">Explore Kavach →</a>
+          </div>
+
+          <div class="prod">
+            <h3>Kavach v2</h3>
+            <div class="p-tag">ML-Powered Reverse Proxy</div>
+            <p>5-dimensional traffic classifier sitting between internet and your app. Routes safe users forward, attackers to honeypots.</p>
+            <ul>
+              <li>Go + Python architecture</li>
+              <li>0-100 risk scoring</li>
+              <li>Dynamic honeypots</li>
+              <li>Docker Compose ready</li>
+              <li>AWS deployment</li>
+            </ul>
+            <a href="#" class="p-cta">Learn More →</a>
+          </div>
+
+          <div class="prod">
+            <h3>Intelligence Dashboard</h3>
+            <div class="p-tag">Attacker Profiling & TTPs</div>
+            <p>Real-time threat intelligence from your honeypots. Profile attackers, analyze tactics, extract threat trends.</p>
+            <ul>
+              <li>Attacker profiles</li>
+              <li>TTP analysis</li>
+              <li>Threat trends</li>
+              <li>Behavioral timeline</li>
+              <li>STIX/TAXII export</li>
+            </ul>
+            <a href="kavach-dashboard-unified.html" class="p-cta">View Dashboard →</a>
+          </div>
+        </div>
+
+        <!-- STATS -->
+        <div class="stats reveal">
+          <div class="stat">
+            <div class="num">99.98%</div>
+            <div class="cap">Detection Accuracy</div>
+          </div>
+          <div class="stat">
+            <div class="num">1.9s</div>
+            <div class="cap">Mean Time to Detect</div>
+          </div>
+          <div class="stat">
+            <div class="num">5</div>
+            <div class="cap">Classification Dimensions</div>
+          </div>
+          <div class="stat">
+            <div class="num">0</div>
+            <div class="cap">Database Required (v1)</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VISION SECTION -->
+    <section class="section" id="vision">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <span class="tag">Our Mission</span>
+          <h2>Deception as Your <span class="grad">Invisible Shield</span></h2>
+        </div>
+        <div style="max-width:720px;margin:0 auto;position:relative;z-index:1;">
+          <p style="font-size:17px;color:var(--text-muted);line-height:1.8;margin-bottom:24px;" class="reveal">
+            Most security waits for breaches. We turn the tables. Attackers reveal themselves completely the moment they interact with our honeypots—fingerprinted, profiled, and caught. One person, one vision, one relentless focus: armor that fights back.
+          </p>
+          <p style="font-size:17px;color:var(--text-muted);line-height:1.8;" class="reveal">
+            Every interaction becomes a signal. Every signal becomes evidence. Every breach attempt makes you smarter.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA SECTION -->
+    <section class="section">
+      <div class="wrap">
+        <div class="cta-section reveal">
+          <h2>Ready to Armor Your Infrastructure?</h2>
+          <p>Start with Kavach today. Deploy tokens, trap attackers, build threat intelligence.</p>
+          <button class="btn-primary"><span>Get Started Free ⚡</span></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="wrap">
+        <div class="footer-grid reveal">
+          <div class="footer-col">
+            <h4>Products</h4>
+            <a href="kavach-product-page-unified.html">Kavach</a>
+            <a href="#">Kavach v2</a>
+            <a href="kavach-dashboard-unified.html">Dashboard</a>
+          </div>
+          <div class="footer-col">
+            <h4>Resources</h4>
+            <a href="#">Documentation</a>
+            <a href="#">GitHub</a>
+            <a href="#">API Reference</a>
+          </div>
+          <div class="footer-col">
+            <h4>Company</h4>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+            <a href="#">Blog</a>
+          </div>
+          <div class="footer-col">
+            <h4>Legal</h4>
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+            <a href="#">Security</a>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2026 PS Security. All rights reserved.</p>
+          <div style="display:flex;gap:24px;">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => e.isIntersecting && e.target.classList.add('in'));
+    }, { threshold: .15 });
+    document.querySelectorAll('.reveal').forEach(e => observer.observe(e));
+  </script>
+</body>
+</html>

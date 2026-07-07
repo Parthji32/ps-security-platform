@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0A0A14">
+<title>Kavach — Canary Tokens & Threat Intelligence | PS</title>
+<meta name="description" content="Deploy Kavach to trap attackers with multi-format canary tokens. Fingerprint threats in real-time. Profile attackers. Get forensic-grade evidence.">
+<style>
+:root{
+  --primary:#7C3AED; --primary-hover:#8B5CF6; --cyan:#06B6D4; --pink:#EC4899;
+  --dark-bg:#0A0A14; --dark-surface:#0D0B1A; --panel:#120E24;
+  --border:rgba(124,58,237,0.14); --border-hover:rgba(6,182,212,0.4);
+  --text-primary:#F8FAFC; --text-secondary:#cbd5e1; --text-muted:#6b7280;
+  --grad:linear-gradient(120deg,#7C3AED,#06B6D4);
+  --grad-tri:linear-gradient(120deg,#EC4899,#7C3AED,#06B6D4);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html{overflow-x:hidden;scroll-behavior:smooth;}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',sans-serif;
+  background:var(--dark-bg);color:var(--text-secondary);overflow-x:hidden;line-height:1.55;
+}
+a{text-decoration:none;color:inherit;}
+section{scroll-margin-top:100px;}
+.wrap{max-width:1240px;margin:0 auto;padding:0 40px;}
+
+/* ANIMATED BACKGROUND ORBS */
+.bg-orbs{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;}
+.orb{position:absolute;border-radius:50%;filter:blur(90px);opacity:0.4;animation:float 18s ease-in-out infinite;}
+.orb.o1{width:480px;height:480px;background:#7C3AED;top:-120px;left:-100px;}
+.orb.o2{width:420px;height:420px;background:#06B6D4;top:40%;right:-120px;animation-delay:-6s;}
+.orb.o3{width:360px;height:360px;background:#EC4899;bottom:-100px;left:30%;animation-delay:-12s;opacity:0.25;}
+@keyframes float{0%,100%{transform:translate(0,0) scale(1);}33%{transform:translate(60px,-40px) scale(1.1);}66%{transform:translate(-40px,50px) scale(0.95);}}
+.content{position:relative;z-index:1;}
+
+/* FLOATING PILL NAV */
+nav{position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:200;width:calc(100% - 40px);max-width:1100px;}
+.nav-inner{display:flex;align-items:center;gap:20px;background:rgba(18,14,36,0.72);backdrop-filter:blur(18px);border:1px solid var(--border);border-radius:100px;padding:10px 14px 10px 22px;box-shadow:0 12px 40px rgba(0,0,0,.5);}
+.nav-logo{font-size:19px;font-weight:900;letter-spacing:-0.04em;display:flex;align-items:center;gap:9px;}
+.logo-mark{width:24px;height:24px;border-radius:8px;background:var(--grad-tri);box-shadow:0 0 18px rgba(124,58,237,.6);animation:pulse 3s ease-in-out infinite;}
+@keyframes pulse{0%,100%{box-shadow:0 0 18px rgba(124,58,237,.6);}50%{box-shadow:0 0 28px rgba(6,182,212,.7);}}
+.nav-logo .ps{color:var(--text-primary);}
+.nav-links{display:flex;gap:6px;margin-left:auto;list-style:none;}
+.nav-links a{font-size:13px;font-weight:600;color:var(--text-muted);padding:8px 16px;border-radius:100px;transition:all .2s;}
+.nav-links a:hover{color:var(--text-primary);background:rgba(124,58,237,0.16);}
+.nav-cta{padding:10px 22px;border-radius:100px;font-size:13px;font-weight:700;background:var(--grad);color:#fff;border:none;cursor:pointer;transition:all .2s;white-space:nowrap;}
+.nav-cta:hover{transform:scale(1.05);box-shadow:0 0 24px rgba(6,182,212,.5);}
+
+/* REVEAL ON SCROLL */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);}
+.reveal.in{opacity:1;transform:none;}
+
+/* HERO */
+.hero{padding:180px 0 90px;text-align:center;position:relative;}
+.hero .flair{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;color:var(--cyan);background:rgba(6,182,212,0.10);border:1px solid rgba(6,182,212,0.3);padding:7px 18px;border-radius:100px;margin-bottom:28px;animation:blink 2s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.6;}}
+.hero .flair .live-dot{width:7px;height:7px;border-radius:50%;background:var(--cyan);box-shadow:0 0 8px var(--cyan);}
+.hero h1{font-size:64px;font-weight:900;line-height:1.02;letter-spacing:-0.05em;color:var(--text-primary);margin-bottom:24px;}
+.hero h1 .grad{background:var(--grad-tri);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shine 5s linear infinite;}
+@keyframes shine{to{background-position:200% center;}}
+.hero p.lead{font-size:18px;color:var(--text-secondary);max-width:680px;margin:0 auto 40px;}
+.hero-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+.btn-primary{padding:16px 36px;border-radius:100px;font-size:15px;font-weight:700;background:var(--grad);color:#fff;border:none;cursor:pointer;transition:all .25s;position:relative;overflow:hidden;}
+.btn-primary::after{content:'';position:absolute;inset:0;background:var(--grad-tri);opacity:0;transition:opacity .25s;}
+.btn-primary span{position:relative;z-index:1;}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 14px 40px rgba(124,58,237,.5);}
+.btn-primary:hover::after{opacity:1;}
+.btn-ghost{padding:16px 36px;border-radius:100px;font-size:15px;font-weight:700;color:var(--text-primary);background:rgba(255,255,255,0.03);border:1px solid var(--border);cursor:pointer;transition:all .25s;}
+.btn-ghost:hover{border-color:var(--cyan);background:rgba(6,182,212,0.08);transform:translateY(-3px);}
+
+/* SECTION STYLES */
+.section{padding:100px 0;position:relative;}
+.sec-head{text-align:center;max-width:680px;margin:0 auto 64px;}
+.tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:16px;}
+.sec-head h2{font-size:48px;font-weight:900;letter-spacing:-0.04em;color:var(--text-primary);line-height:1.08;margin-bottom:16px;}
+.sec-head h2 .grad{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.sec-head p{font-size:17px;color:var(--text-muted);}
+
+/* FEATURES GRID */
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:64px;}
+.feature-card{background:var(--panel);border:1px solid var(--border);border-radius:24px;padding:40px;transition:all .3s;position:relative;overflow:hidden;}
+.feature-card:hover{transform:translateY(-8px);border-color:var(--cyan);box-shadow:0 30px 60px rgba(6,182,212,0.15);}
+.feature-card h3{font-size:20px;font-weight:800;color:var(--text-primary);margin-bottom:12px;}
+.feature-card p{font-size:15px;color:var(--text-muted);margin-bottom:24px;}
+.feature-list{list-style:none;}
+.feature-list li{font-size:14px;color:var(--text-secondary);padding:8px 0;display:flex;gap:10px;}
+.feature-list li::before{content:'✓';color:var(--cyan);font-weight:900;}
+
+/* PRICING */
+.pricing-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:32px;margin-top:64px;}
+.price-card{background:var(--panel);border:1px solid var(--border);border-radius:24px;padding:48px;text-align:center;transition:all .3s;}
+.price-card.featured{border-color:var(--cyan);background:linear-gradient(135deg,rgba(6,182,212,0.08),rgba(124,58,237,0.08));}
+.price-card .badge{display:inline-block;background:rgba(6,182,212,0.15);color:var(--cyan);font-size:12px;font-weight:700;padding:6px 14px;border-radius:100px;margin-bottom:16px;}
+.price-card h3{font-size:24px;font-weight:900;color:var(--text-primary);margin-bottom:8px;}
+.price-card .subtitle{font-size:14px;color:var(--text-muted);margin-bottom:24px;}
+.price-card .price{font-size:48px;font-weight:900;background:var(--grad-tri);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px;}
+.price-card .period{font-size:14px;color:var(--text-muted);margin-bottom:32px;}
+.price-card ul{list-style:none;text-align:left;margin-bottom:32px;}
+.price-card li{font-size:14px;color:var(--text-secondary);padding:10px 0;border-bottom:1px solid var(--border);display:flex;gap:10px;}
+.price-card li::before{content:'✓';color:var(--cyan);font-weight:900;flex-shrink:0;}
+.price-card button{width:100%;padding:14px 24px;border-radius:100px;font-weight:700;font-size:15px;border:none;cursor:pointer;transition:all .25s;}
+.price-card.featured button{background:var(--grad);color:#fff;}
+.price-card.featured button:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(124,58,237,0.4);}
+.price-card button{background:rgba(255,255,255,0.05);color:var(--text-primary);border:1px solid var(--border);}
+.price-card button:hover{border-color:var(--cyan);background:rgba(6,182,212,0.08);}
+
+/* CTA SECTION */
+.cta{background:linear-gradient(135deg,rgba(124,58,237,0.1),rgba(6,182,212,0.05));border:1px solid var(--border);border-radius:24px;padding:64px 40px;text-align:center;}
+.cta h2{font-size:42px;font-weight:900;color:var(--text-primary);margin-bottom:16px;}
+.cta p{font-size:18px;color:var(--text-muted);max-width:600px;margin:0 auto 32px;}
+</style>
+</head>
+<body>
+  <div class="bg-orbs">
+    <div class="orb o1"></div>
+    <div class="orb o2"></div>
+    <div class="orb o3"></div>
+  </div>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <div class="nav-inner">
+      <div class="nav-logo">
+        <div class="logo-mark">🛡️</div>
+        <span class="ps">PS</span>
+      </div>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#docs">Documentation</a>
+      </div>
+      <button class="nav-cta">Start Free Trial</button>
+    </div>
+  </nav>
+
+  <div class="content">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="wrap">
+        <div class="flair">
+          <span class="live-dot"></span>
+          Now with attacker fingerprinting
+        </div>
+        <h1>Multi-format Canary Tokens<br>With <span class="grad">Real-time Fingerprinting</span></h1>
+        <p class="lead">Deploy URL, document, API key, DNS, and email tokens everywhere. When attackers use them, Kavach captures their fingerprint—browser, OS, TLS, network, geolocation. Profile threat actors from actual attack data.</p>
+        <div class="hero-btns">
+          <button class="btn-primary"><span>Deploy Your First Token ⚡</span></button>
+          <button class="btn-ghost">Watch Demo →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="section" id="features">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <span class="tag">How Kavach Works</span>
+          <h2>Deception Engineered for <span class="grad">Real-World Attacks</span></h2>
+          <p>Multi-layer token deployment + intelligent fingerprinting = complete attacker profile</p>
+        </div>
+        <div class="features-grid reveal">
+          <div class="feature-card">
+            <h3>Multi-Format Tokens</h3>
+            <p>Deploy tokens across every surface attackers search.</p>
+            <ul class="feature-list">
+              <li>URL tokens (click to trigger)</li>
+              <li>Document tokens (pixel-based)</li>
+              <li>API key tokens (fake credentials)</li>
+              <li>DNS tokens (subdomain probes)</li>
+              <li>Email tokens (forwarding)</li>
+            </ul>
+          </div>
+          <div class="feature-card">
+            <h3>Attacker Fingerprinting</h3>
+            <p>Capture everything about who triggered your trap.</p>
+            <ul class="feature-list">
+              <li>Browser & OS detection</li>
+              <li>TLS fingerprinting</li>
+              <li>Network info (ISP, VPN)</li>
+              <li>Geolocation via IP</li>
+              <li>Request metadata</li>
+            </ul>
+          </div>
+          <div class="feature-card">
+            <h3>Real-Time Alerts</h3>
+            <p>Know instantly when your traps are triggered.</p>
+            <ul class="feature-list">
+              <li>Slack webhooks</li>
+              <li>Email notifications</li>
+              <li>Custom webhooks</li>
+              <li>Dashboard live updates</li>
+              <li>Historical logs</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section class="section" id="pricing">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <span class="tag">Simple Pricing</span>
+          <h2>Plans for Every <span class="grad">Security Team</span></h2>
+          <p>Start free. Scale as you grow. No credit card required for trial.</p>
+        </div>
+        <div class="pricing-grid reveal">
+          <div class="price-card">
+            <span class="badge">STARTER</span>
+            <h3>Solo</h3>
+            <p class="subtitle">Perfect for trying Kavach</p>
+            <div class="price">Free</div>
+            <p class="period">Forever</p>
+            <ul>
+              <li>Up to 10 active tokens</li>
+              <li>Basic fingerprinting</li>
+              <li>Email alerts</li>
+              <li>7-day logs</li>
+              <li>Community support</li>
+            </ul>
+            <button>Start Free</button>
+          </div>
+          <div class="price-card featured">
+            <span class="badge">RECOMMENDED</span>
+            <h3>Team</h3>
+            <p class="subtitle">For security teams</p>
+            <div class="price">$299</div>
+            <p class="period">per month</p>
+            <ul>
+              <li>Unlimited tokens</li>
+              <li>Full fingerprinting</li>
+              <li>Slack + Email + Webhook</li>
+              <li>90-day logs</li>
+              <li>Attacker correlation</li>
+              <li>Priority support</li>
+            </ul>
+            <button>Start 14-Day Trial</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section">
+      <div class="wrap">
+        <div class="cta reveal">
+          <h2>Ready to Trap Your First Attacker?</h2>
+          <p>Join security teams deploying Kavach to turn breaches into intelligence.</p>
+          <button class="btn-primary"><span>Get Started Free ⚡</span></button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => e.isIntersecting && e.target.classList.add('in'));
+    }, { threshold: .15 });
+    document.querySelectorAll('.reveal').forEach(e => observer.observe(e));
+  </script>
+</body>
+</html>
