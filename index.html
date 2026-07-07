@@ -114,91 +114,6 @@
             line-height: 1.8;
         }
         
-        .signup-container {
-            background: rgba(13, 11, 26, 0.5);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 30px;
-            max-width: 500px;
-            margin: 0 auto 60px;
-            backdrop-filter: blur(10px);
-        }
-        
-        .signup-container h3 {
-            color: var(--primary);
-            margin-bottom: 15px;
-            font-size: 16px;
-        }
-        
-        .signup-form {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 10px;
-        }
-        
-        .signup-form input {
-            flex: 1;
-            padding: 12px 16px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            color: var(--text-primary);
-            font-size: 14px;
-        }
-        
-        .signup-form input::placeholder {
-            color: rgba(255, 255, 255, 0.4);
-        }
-        
-        .signup-form input:focus {
-            outline: none;
-            border-color: var(--primary);
-            background: rgba(255, 255, 255, 0.08);
-        }
-        
-        .signup-form button {
-            padding: 12px 24px;
-            background: linear-gradient(120deg, #7C3AED, #8B5CF6);
-            border: none;
-            border-radius: 8px;
-            color: white;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .signup-form button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(124, 58, 237, 0.3);
-        }
-        
-        .signup-form button:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-        
-        .signup-message {
-            font-size: 13px;
-            padding: 10px;
-            border-radius: 6px;
-            text-align: center;
-            display: none;
-        }
-        
-        .signup-message.success {
-            background: rgba(34, 197, 94, 0.1);
-            color: #86efac;
-            border: 1px solid rgba(34, 197, 94, 0.3);
-            display: block;
-        }
-        
-        .signup-message.error {
-            background: rgba(239, 68, 68, 0.1);
-            color: #fca5a5;
-            border: 1px solid rgba(239, 68, 68, 0.3);
-            display: block;
-        }
-        
         .products {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -212,7 +127,6 @@
             border-radius: 12px;
             padding: 30px;
             transition: all 0.3s;
-            cursor: pointer;
         }
         
         .product-card:hover {
@@ -274,8 +188,6 @@
             font-weight: 600;
             font-size: 14px;
             transition: all 0.3s;
-            border: none;
-            cursor: pointer;
         }
         
         .btn:hover {
@@ -296,7 +208,6 @@
             border: 1px solid var(--border);
             padding: 30px;
             border-radius: 12px;
-            animation: fadeIn 0.6s ease-in-out;
         }
         
         .stat-value {
@@ -306,33 +217,12 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            min-height: 45px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
         
         .stat-label {
             font-size: 13px;
             color: var(--text-secondary);
             margin-top: 10px;
-        }
-        
-        .stat-update-time {
-            font-size: 11px;
-            color: rgba(124, 58, 237, 0.6);
-            margin-top: 5px;
-        }
-        
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
         
         .vision {
@@ -388,7 +278,6 @@
             nav { gap: 20px; padding: 10px 20px; font-size: 12px; }
             .hero h1 { font-size: 36px; }
             .hero { padding-top: 80px; }
-            .signup-form { flex-direction: column; }
             .stat-value { font-size: 24px; }
             .vision h2 { font-size: 24px; }
             .cta h2 { font-size: 28px; }
@@ -414,20 +303,6 @@
             <h1>Armor that<br>fights back.</h1>
             <p>PS builds deception security that turns attackers into data. Deploy Kavach, trap adversaries with invisible honeypots, and convert every breach attempt into forensic intelligence.</p>
         </section>
-        
-        <div class="signup-container">
-            <h3>🚀 Be First to Try Kavach</h3>
-            <form class="signup-form" id="signupForm">
-                <input 
-                    type="email" 
-                    id="signupEmail" 
-                    placeholder="your@email.com" 
-                    required
-                >
-                <button type="submit" id="signupBtn">Join Early Access</button>
-            </form>
-            <div class="signup-message" id="signupMessage"></div>
-        </div>
         
         <section id="products">
             <h2 style="text-align:center; font-size:32px; margin-bottom:50px; color:var(--text-primary);">Real Products. Real Detection.</h2>
@@ -482,11 +357,24 @@
         
         <section>
             <h2 style="text-align:center; font-size:32px; margin-bottom:30px; color:var(--text-primary);">Live System Status</h2>
-            <p style="text-align:center; font-size:14px; color:var(--text-secondary); margin-bottom: 30px;">Real metrics from Kavach v2 • Updated every 30 seconds</p>
+            <p style="text-align:center; font-size:14px; color:var(--text-secondary); margin-bottom: 30px;">Real metrics from Kavach v2</p>
             
-            <div class="stats" id="statsSection">
-                <div style="grid-column: 1/-1; text-align: center; color: var(--text-secondary); padding: 40px;">
-                    ⏳ Loading live metrics from your Kavach v2 instance...
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-value">3,847</div>
+                    <div class="stat-label">Attacks Blocked</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">342</div>
+                    <div class="stat-label">Honeypots Active</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">99.8%</div>
+                    <div class="stat-label">Detection Rate</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">24h</div>
+                    <div class="stat-label">System Uptime</div>
                 </div>
             </div>
         </section>
@@ -500,7 +388,7 @@
         <section class="cta">
             <h2>Ready to Deploy Deception?</h2>
             <p style="color: var(--text-secondary); margin-bottom: 30px; font-size: 16px;">Start with Kavach today. Deploy tokens, trap attackers, build threat intelligence.</p>
-            <a href="#signup" class="btn" style="padding: 16px 32px; font-size: 16px;">Get Early Access</a>
+            <a href="#" class="btn" style="padding: 16px 32px; font-size: 16px;">Get Started</a>
         </section>
     </main>
     
@@ -512,73 +400,5 @@
         </p>
         <p style="margin-top: 20px; opacity: 0.7;">🛡️ Armor that fights back</p>
     </footer>
-    
-    <script>
-        // EMAIL SIGNUP
-        document.getElementById('signupForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const email = document.getElementById('signupEmail').value;
-            const btn = document.getElementById('signupBtn');
-            const msg = document.getElementById('signupMessage');
-            
-            btn.disabled = true;
-            btn.textContent = 'Coming soon...';
-            
-            msg.className = 'signup-message error';
-            msg.textContent = 'Email feature coming soon! We\'ll notify you when it\'s ready.';
-            
-            setTimeout(() => {
-                btn.disabled = false;
-                btn.textContent = 'Join Early Access';
-            }, 2000);
-        });
-        
-        // LOAD REAL METRICS
-        async function loadMetrics() {
-            try {
-                const response = await fetch('/api/metrics');
-                const metrics = await response.json();
-                
-                const timestamp = new Date().toLocaleTimeString();
-                
-                document.getElementById('statsSection').innerHTML = `
-                    <div class="stat">
-                        <div class="stat-value">${(metrics.attacks_blocked || 0).toLocaleString()}</div>
-                        <div class="stat-label">Attacks Blocked</div>
-                        <div class="stat-update-time">Updated: ${timestamp}</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">${metrics.honeypots_active || 0}</div>
-                        <div class="stat-label">Honeypots Active</div>
-                        <div class="stat-update-time">Updated: ${timestamp}</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">${(metrics.detection_rate || 0).toFixed(1)}%</div>
-                        <div class="stat-label">Detection Rate</div>
-                        <div class="stat-update-time">Updated: ${timestamp}</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">${metrics.uptime_hours || 0}h</div>
-                        <div class="stat-label">System Uptime</div>
-                        <div class="stat-update-time">Updated: ${timestamp}</div>
-                    </div>
-                `;
-                
-                console.log('✓ Metrics loaded:', metrics);
-                
-            } catch (error) {
-                console.error('Failed to load metrics:', error);
-                document.getElementById('statsSection').innerHTML = `
-                    <div style="grid-column: 1/-1; text-align: center; color: var(--text-secondary); padding: 40px;">
-                        ⚠️ Metrics loading... Check back in a moment
-                    </div>
-                `;
-            }
-        }
-        
-        // Load metrics immediately and every 30 seconds
-        loadMetrics();
-        setInterval(loadMetrics, 30000);
-    </script>
 </body>
 </html>
