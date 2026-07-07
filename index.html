@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#0A0A14">
     <title>PS Security Platform | Deception Security</title>
-    <meta name="description" content="PS Security Platform - Turn attackers into data with Kavach, the world's most advanced deception security system.">
+    <meta name="description" content="PS Security - Turn attackers into data with Kavach, the world's most advanced honeypot & canary token platform.">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; overflow-x: hidden; }
@@ -17,7 +17,6 @@
             line-height: 1.6;
         }
         
-        /* CSS Variables */
         :root {
             --primary: #7C3AED;
             --secondary: #06B6D4;
@@ -29,7 +28,6 @@
             --border: rgba(124, 58, 237, 0.14);
         }
         
-        /* Background Orbs */
         .bg-orbs {
             position: fixed;
             inset: 0;
@@ -50,94 +48,59 @@
         .orb-3 { width: 300px; height: 300px; background: var(--accent); bottom: -100px; left: 30%; animation: float 20s ease-in-out infinite 4s; }
         
         @keyframes float {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(50px, -30px) scale(1.1); }
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(30px); }
         }
         
-        /* Layout */
-        .wrapper { position: relative; z-index: 1; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-        
-        /* Navigation */
         nav {
             position: fixed;
             top: 20px;
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(13, 11, 26, 0.7);
+            display: flex;
+            gap: 40px;
+            background: rgba(10, 10, 20, 0.7);
             backdrop-filter: blur(10px);
             border: 1px solid var(--border);
-            border-radius: 50px;
-            padding: 12px 20px;
-            display: flex;
-            align-items: center;
-            gap: 40px;
+            padding: 12px 30px;
+            border-radius: 100px;
             z-index: 1000;
-            width: 90%;
-            max-width: 600px;
-        }
-        
-        .logo {
-            font-size: 18px;
-            font-weight: 900;
-            color: var(--text-primary);
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
         
         nav a {
             color: var(--text-secondary);
             text-decoration: none;
-            font-size: 13px;
-            transition: color 0.2s;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.3s;
         }
         
-        nav a:hover { color: var(--text-primary); }
+        nav a:hover { color: var(--primary); }
+        nav .logo { font-weight: 900; color: var(--primary); }
         
-        .nav-cta {
-            margin-left: auto;
-            padding: 10px 20px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            border: none;
-            border-radius: 50px;
-            font-size: 12px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: transform 0.2s;
+        main { position: relative; z-index: 1; }
+        
+        section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
         }
         
-        .nav-cta:hover { transform: scale(1.05); }
-        
-        /* Hero Section */
         .hero {
             text-align: center;
-            padding: 180px 20px 80px;
-        }
-        
-        .flair {
-            display: inline-block;
-            background: rgba(6, 182, 212, 0.1);
-            border: 1px solid rgba(6, 182, 212, 0.3);
-            color: var(--secondary);
-            padding: 8px 16px;
-            border-radius: 50px;
-            font-size: 12px;
-            font-weight: 600;
-            margin-bottom: 20px;
+            padding-top: 120px;
+            min-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
         
         .hero h1 {
-            font-size: 60px;
+            font-size: 64px;
             font-weight: 900;
-            color: var(--text-primary);
-            margin-bottom: 20px;
             line-height: 1.1;
-        }
-        
-        .gradient-text {
-            background: linear-gradient(120deg, var(--accent), var(--primary), var(--secondary));
+            margin-bottom: 20px;
+            background: linear-gradient(120deg, #7C3AED, #06B6D4);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -146,164 +109,268 @@
         .hero p {
             font-size: 18px;
             color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto 30px;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            line-height: 1.8;
         }
         
-        .buttons {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        
-        .btn {
-            padding: 15px 30px;
-            border-radius: 50px;
-            font-size: 14px;
-            font-weight: 700;
-            border: none;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(124, 58, 237, 0.4);
-        }
-        
-        .btn-ghost {
-            background: transparent;
-            color: var(--text-primary);
+        .signup-container {
+            background: rgba(13, 11, 26, 0.5);
             border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 30px;
+            max-width: 500px;
+            margin: 0 auto 60px;
+            backdrop-filter: blur(10px);
         }
         
-        .btn-ghost:hover {
-            border-color: var(--secondary);
-            background: rgba(6, 182, 212, 0.1);
+        .signup-container h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 16px;
         }
         
-        /* Products Section */
-        .section {
-            padding: 80px 20px;
+        .signup-form {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
         }
         
-        .section-title {
-            text-align: center;
-            font-size: 40px;
-            font-weight: 900;
+        .signup-form input {
+            flex: 1;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            border-radius: 8px;
             color: var(--text-primary);
-            margin-bottom: 50px;
+            font-size: 14px;
         }
         
-        .products-grid {
+        .signup-form input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+        
+        .signup-form input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: rgba(255, 255, 255, 0.08);
+        }
+        
+        .signup-form button {
+            padding: 12px 24px;
+            background: linear-gradient(120deg, #7C3AED, #8B5CF6);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .signup-form button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(124, 58, 237, 0.3);
+        }
+        
+        .signup-form button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        .signup-message {
+            font-size: 13px;
+            padding: 10px;
+            border-radius: 6px;
+            text-align: center;
+            display: none;
+        }
+        
+        .signup-message.success {
+            background: rgba(34, 197, 94, 0.1);
+            color: #86efac;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            display: block;
+        }
+        
+        .signup-message.error {
+            background: rgba(239, 68, 68, 0.1);
+            color: #fca5a5;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            display: block;
+        }
+        
+        .products {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-bottom: 50px;
+            gap: 30px;
+            margin: 60px 0;
         }
         
         .product-card {
-            background: var(--dark-surface);
+            background: rgba(13, 11, 26, 0.3);
             border: 1px solid var(--border);
-            border-radius: 16px;
+            border-radius: 12px;
             padding: 30px;
             transition: all 0.3s;
             cursor: pointer;
         }
         
         .product-card:hover {
-            transform: translateY(-8px);
             border-color: var(--secondary);
-            box-shadow: 0 20px 50px rgba(6, 182, 212, 0.15);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(124, 58, 237, 0.1);
         }
         
         .product-card h3 {
-            font-size: 20px;
-            font-weight: 900;
             color: var(--text-primary);
             margin-bottom: 10px;
+            font-size: 20px;
+        }
+        
+        .product-card .tag {
+            display: inline-block;
+            background: rgba(124, 58, 237, 0.1);
+            color: var(--primary);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-bottom: 15px;
         }
         
         .product-card p {
-            font-size: 14px;
             color: var(--text-secondary);
             margin-bottom: 20px;
+            font-size: 14px;
         }
         
-        .product-card a {
-            color: var(--secondary);
+        .product-card ul {
+            list-style: none;
+            margin: 20px 0;
+            font-size: 13px;
+        }
+        
+        .product-card li {
+            padding: 8px 0;
+            padding-left: 20px;
+            position: relative;
+            color: var(--text-secondary);
+        }
+        
+        .product-card li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background: linear-gradient(120deg, #7C3AED, #8B5CF6);
+            color: white;
             text-decoration: none;
+            border-radius: 8px;
             font-weight: 600;
-            transition: color 0.2s;
+            font-size: 14px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
         }
         
-        .product-card a:hover { color: var(--text-primary); }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(124, 58, 237, 0.3);
+        }
         
-        /* Stats Section */
         .stats {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 20px;
-            background: rgba(124, 58, 237, 0.05);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 40px;
-        }
-        
-        .stat {
+            margin: 60px 0;
             text-align: center;
         }
         
-        .stat-number {
+        .stat {
+            background: rgba(13, 11, 26, 0.3);
+            border: 1px solid var(--border);
+            padding: 30px;
+            border-radius: 12px;
+            animation: fadeIn 0.6s ease-in-out;
+        }
+        
+        .stat-value {
             font-size: 36px;
             font-weight: 900;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background: linear-gradient(120deg, #7C3AED, #06B6D4);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 8px;
+            min-height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         .stat-label {
             font-size: 13px;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            color: var(--text-secondary);
+            margin-top: 10px;
         }
         
-        /* Vision Section */
+        .stat-update-time {
+            font-size: 11px;
+            color: rgba(124, 58, 237, 0.6);
+            margin-top: 5px;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
         .vision {
             text-align: center;
-            background: linear-gradient(135deg, rgba(124, 58, 237, 0.1), rgba(6, 182, 212, 0.05));
+            background: rgba(13, 11, 26, 0.3);
             border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 50px;
-            margin: 50px 0;
+            padding: 60px 40px;
+            border-radius: 12px;
+            margin: 60px 0;
         }
         
         .vision h2 {
-            font-size: 32px;
-            font-weight: 900;
-            color: var(--text-primary);
+            font-size: 36px;
             margin-bottom: 20px;
+            color: var(--text-primary);
         }
         
         .vision p {
             font-size: 16px;
             color: var(--text-secondary);
-            max-width: 700px;
+            max-width: 600px;
             margin: 0 auto;
             line-height: 1.8;
         }
         
-        /* Footer */
+        .cta {
+            text-align: center;
+            padding: 80px 20px;
+        }
+        
+        .cta h2 {
+            font-size: 40px;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+        
         footer {
+            background: rgba(10, 10, 20, 0.5);
             border-top: 1px solid var(--border);
             padding: 40px 20px;
             text-align: center;
@@ -312,140 +379,206 @@
         }
         
         footer a {
-            color: var(--secondary);
+            color: var(--primary);
             text-decoration: none;
-            transition: color 0.2s;
+            margin: 0 10px;
         }
         
-        footer a:hover { color: var(--text-primary); }
-        
-        /* Responsive */
         @media (max-width: 768px) {
-            nav { flex-wrap: wrap; gap: 20px; width: 95%; }
-            nav a:not(.logo):nth-child(n+2) { display: none; }
-            .nav-cta { margin-left: auto; }
+            nav { gap: 20px; padding: 10px 20px; font-size: 12px; }
             .hero h1 { font-size: 36px; }
-            .hero p { font-size: 14px; }
-            .section-title { font-size: 28px; }
-            .buttons { flex-direction: column; }
-            .btn { width: 100%; }
+            .hero { padding-top: 80px; }
+            .signup-form { flex-direction: column; }
+            .stat-value { font-size: 24px; }
+            .vision h2 { font-size: 24px; }
+            .cta h2 { font-size: 28px; }
         }
     </style>
 </head>
 <body>
-    <!-- Background Orbs -->
     <div class="bg-orbs">
         <div class="orb orb-1"></div>
         <div class="orb orb-2"></div>
         <div class="orb orb-3"></div>
     </div>
     
-    <!-- Navigation -->
     <nav>
-        <div class="logo">🛡️ PS</div>
+        <a href="#" class="logo">🛡️ PS</a>
         <a href="#products">Products</a>
-        <a href="#vision">Vision</a>
         <a href="product.html">Kavach</a>
-        <button class="nav-cta">Get Started</button>
+        <a href="dashboard.html">Dashboard</a>
     </nav>
     
-    <div class="wrapper">
-        <!-- Hero Section -->
+    <main>
         <section class="hero">
-            <div class="container">
-                <div class="flair">🎯 Building Deception at Scale</div>
-                <h1>Armor that <span class="gradient-text">fights back.</span></h1>
-                <p>PS Security Platform turns every attack into intelligence. Deploy honeypots, catch attackers, and stay ahead of threats.</p>
-                <div class="buttons">
-                    <button class="btn btn-primary">Deploy Now ⚡</button>
-                    <button class="btn btn-ghost">Learn More →</button>
-                </div>
-            </div>
+            <h1>Armor that<br>fights back.</h1>
+            <p>PS builds deception security that turns attackers into data. Deploy Kavach, trap adversaries with invisible honeypots, and convert every breach attempt into forensic intelligence.</p>
         </section>
         
-        <!-- Products Section -->
-        <section class="section" id="products">
-            <div class="container">
-                <h2 class="section-title">Our Products</h2>
-                <div class="products-grid">
-                    <div class="product-card">
-                        <h3>🎫 Kavach</h3>
-                        <p>Canary tokens with real-time attacker fingerprinting. Deploy tokens everywhere and catch threats instantly.</p>
-                        <a href="product.html">Learn More →</a>
-                    </div>
-                    <div class="product-card">
-                        <h3>⚡ Kavach v2</h3>
-                        <p>ML-powered reverse proxy. Invisible deception layer that classifies traffic and routes attackers to honeypots.</p>
-                        <a href="#contact">Coming Soon →</a>
-                    </div>
-                    <div class="product-card">
-                        <h3>📊 Dashboard</h3>
-                        <p>Real-time control center. Monitor honeypots, track attackers, and manage your deception infrastructure.</p>
-                        <a href="dashboard.html">View Demo →</a>
-                    </div>
+        <div class="signup-container">
+            <h3>🚀 Be First to Try Kavach</h3>
+            <form class="signup-form" id="signupForm">
+                <input 
+                    type="email" 
+                    id="signupEmail" 
+                    placeholder="your@email.com" 
+                    required
+                >
+                <button type="submit" id="signupBtn">Join Early Access</button>
+            </form>
+            <div class="signup-message" id="signupMessage"></div>
+        </div>
+        
+        <section id="products">
+            <h2 style="text-align:center; font-size:32px; margin-bottom:50px; color:var(--text-primary);">Real Products. Real Detection.</h2>
+            
+            <div class="products">
+                <div class="product-card">
+                    <span class="tag">LIVE</span>
+                    <h3>Kavach v1</h3>
+                    <p>Canary Tokens & Fingerprinting</p>
+                    <p style="font-size:13px; color:var(--text-secondary);">Deploy multi-format tokens everywhere—URLs, documents, API keys, DNS, email. When attackers use them, Kavach captures their fingerprint.</p>
+                    <ul>
+                        <li>Multi-format tokens</li>
+                        <li>Real-time fingerprinting</li>
+                        <li>Slack / Email alerts</li>
+                        <li>Attacker correlation</li>
+                        <li>Demo mode (no DB)</li>
+                    </ul>
+                    <a href="product.html" class="btn">Explore Kavach →</a>
                 </div>
                 
-                <div class="stats">
-                    <div class="stat">
-                        <div class="stat-number">99.98%</div>
-                        <div class="stat-label">Detection Accuracy</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-number">1.9s</div>
-                        <div class="stat-label">Mean Time to Detect</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-number">5</div>
-                        <div class="stat-label">Classification Dimensions</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-number">0</div>
-                        <div class="stat-label">Database Required</div>
-                    </div>
+                <div class="product-card">
+                    <span class="tag">ONGOING</span>
+                    <h3>Kavach v2</h3>
+                    <p>ML-Powered Reverse Proxy</p>
+                    <p style="font-size:13px; color:var(--text-secondary);">5-dimensional traffic classifier sitting between internet and your app. Routes safe users forward, attackers to honeypots.</p>
+                    <ul>
+                        <li>Go + Python architecture</li>
+                        <li>0-100 risk scoring</li>
+                        <li>Dynamic honeypots</li>
+                        <li>Docker Compose ready</li>
+                        <li>AWS deployment</li>
+                    </ul>
+                    <a href="product.html" class="btn">Learn More →</a>
+                </div>
+                
+                <div class="product-card">
+                    <span class="tag">ONGOING</span>
+                    <h3>Intelligence Dashboard</h3>
+                    <p>Attacker Profiling & TTPs</p>
+                    <p style="font-size:13px; color:var(--text-secondary);">Real-time threat intelligence from your honeypots. Profile attackers, analyze tactics, extract threat trends.</p>
+                    <ul>
+                        <li>Attacker profiles</li>
+                        <li>TTP analysis</li>
+                        <li>Threat trends</li>
+                        <li>Behavioral timeline</li>
+                        <li>STIX/TAXII export</li>
+                    </ul>
+                    <a href="dashboard.html" class="btn">View Dashboard →</a>
                 </div>
             </div>
         </section>
         
-        <!-- Vision Section -->
-        <section class="section" id="vision">
-            <div class="container">
-                <div class="vision">
-                    <h2>Deception as Your Invisible Shield</h2>
-                    <p>The future of cybersecurity isn't bigger walls—it's smarter traps. Every attacker teaches us something. Every probe becomes data we use to protect you. PS Security Platform converts breach attempts into forensic intelligence.</p>
+        <section>
+            <h2 style="text-align:center; font-size:32px; margin-bottom:30px; color:var(--text-primary);">Live System Status</h2>
+            <p style="text-align:center; font-size:14px; color:var(--text-secondary); margin-bottom: 30px;">Real metrics from Kavach v2 • Updated every 30 seconds</p>
+            
+            <div class="stats" id="statsSection">
+                <div style="grid-column: 1/-1; text-align: center; color: var(--text-secondary); padding: 40px;">
+                    ⏳ Loading live metrics from your Kavach v2 instance...
                 </div>
             </div>
         </section>
         
-        <!-- CTA Section -->
-        <section class="section">
-            <div class="container" style="text-align: center;">
-                <h2 class="section-title">Ready to Deploy?</h2>
-                <p style="font-size: 16px; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto;">Join teams turning every breach attempt into actionable intelligence.</p>
-                <button class="btn btn-primary" style="font-size: 16px; padding: 16px 40px;">Start Free Trial ⚡</button>
-            </div>
+        <section class="vision">
+            <h2>Deception as Your Invisible Shield</h2>
+            <p>Most security waits for breaches. We turn the tables. Attackers reveal themselves completely the moment they interact with our honeypots—fingerprinted, profiled, and caught. One person, one vision, one relentless focus: armor that fights back.</p>
+            <p style="margin-top: 20px;">Every interaction becomes a signal. Every signal becomes evidence. Every breach attempt makes you smarter.</p>
         </section>
         
-        <!-- Footer -->
-        <footer>
-            <div class="container">
-                <p>&copy; 2026 PS Security Platform. Built with 🛡️ for deception security.</p>
-                <p><a href="#">Privacy</a> | <a href="#">Terms</a> | <a href="product.html">Products</a> | <a href="dashboard.html">Dashboard</a></p>
-            </div>
-        </footer>
-    </div>
+        <section class="cta">
+            <h2>Ready to Deploy Deception?</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 30px; font-size: 16px;">Start with Kavach today. Deploy tokens, trap attackers, build threat intelligence.</p>
+            <a href="#signup" class="btn" style="padding: 16px 32px; font-size: 16px;">Get Early Access</a>
+        </section>
+    </main>
+    
+    <footer>
+        <p>PS Security Platform | 
+            <a href="#">Privacy</a> | 
+            <a href="#">Terms</a> | 
+            <a href="#">Contact</a>
+        </p>
+        <p style="margin-top: 20px; opacity: 0.7;">🛡️ Armor that fights back</p>
+    </footer>
     
     <script>
-        // Smooth scroll for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(link => {
-            link.addEventListener('click', e => {
-                const href = link.getAttribute('href');
-                if (href !== '#') {
-                    e.preventDefault();
-                    const target = document.querySelector(href);
-                    if (target) target.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
+        // EMAIL SIGNUP
+        document.getElementById('signupForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('signupEmail').value;
+            const btn = document.getElementById('signupBtn');
+            const msg = document.getElementById('signupMessage');
+            
+            btn.disabled = true;
+            btn.textContent = 'Coming soon...';
+            
+            msg.className = 'signup-message error';
+            msg.textContent = 'Email feature coming soon! We\'ll notify you when it\'s ready.';
+            
+            setTimeout(() => {
+                btn.disabled = false;
+                btn.textContent = 'Join Early Access';
+            }, 2000);
         });
+        
+        // LOAD REAL METRICS
+        async function loadMetrics() {
+            try {
+                const response = await fetch('/api/metrics');
+                const metrics = await response.json();
+                
+                const timestamp = new Date().toLocaleTimeString();
+                
+                document.getElementById('statsSection').innerHTML = `
+                    <div class="stat">
+                        <div class="stat-value">${(metrics.attacks_blocked || 0).toLocaleString()}</div>
+                        <div class="stat-label">Attacks Blocked</div>
+                        <div class="stat-update-time">Updated: ${timestamp}</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">${metrics.honeypots_active || 0}</div>
+                        <div class="stat-label">Honeypots Active</div>
+                        <div class="stat-update-time">Updated: ${timestamp}</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">${(metrics.detection_rate || 0).toFixed(1)}%</div>
+                        <div class="stat-label">Detection Rate</div>
+                        <div class="stat-update-time">Updated: ${timestamp}</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">${metrics.uptime_hours || 0}h</div>
+                        <div class="stat-label">System Uptime</div>
+                        <div class="stat-update-time">Updated: ${timestamp}</div>
+                    </div>
+                `;
+                
+                console.log('✓ Metrics loaded:', metrics);
+                
+            } catch (error) {
+                console.error('Failed to load metrics:', error);
+                document.getElementById('statsSection').innerHTML = `
+                    <div style="grid-column: 1/-1; text-align: center; color: var(--text-secondary); padding: 40px;">
+                        ⚠️ Metrics loading... Check back in a moment
+                    </div>
+                `;
+            }
+        }
+        
+        // Load metrics immediately and every 30 seconds
+        loadMetrics();
+        setInterval(loadMetrics, 30000);
     </script>
 </body>
 </html>

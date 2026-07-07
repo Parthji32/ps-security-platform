@@ -1,31 +1,23 @@
 {
   "version": 2,
-  "buildCommand": "npm install",
-  "env": {
-    "SMTP_HOST": "@smtp_host",
-    "SMTP_PORT": "@smtp_port",
-    "SMTP_USER": "@smtp_user",
-    "SMTP_PASS": "@smtp_pass",
-    "FROM_EMAIL": "@from_email",
-    "CONTACT_EMAIL": "@contact_email",
-    "APP_URL": "@app_url",
-    "ANALYTICS_KEY": "@analytics_key"
-  },
-  "functions": {
-    "api.js": {
-      "memory": 512,
-      "maxDuration": 30
+  "builds": [
+    {
+      "src": "api/**/*.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "*.html",
+      "use": "@vercel/static"
     }
-  },
+  ],
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "/api.js"
+      "dest": "/api/$1"
     },
     {
       "src": "/(.*)",
-      "dest": "/index.html",
-      "status": 200
+      "dest": "/$1"
     }
   ]
 }
