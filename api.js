@@ -14,7 +14,7 @@ app.use(express.json());
 
 // Email transporter (using a service like Resend, SendGrid, or your own SMTP)
 const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST,
+  host: process.env.SMTP_HOST || 'localhost',
   port: process.env.SMTP_PORT,
   secure: true,
   auth: {
@@ -89,7 +89,7 @@ app.post('/api/contact', async (req, res) => {
       `
     });
 
-    res.json({ success: true, message: 'Message sent! We'll be in touch.' });
+    res.json({ success: true, message: "Message sent! We'll be in touch." });
   } catch (error) {
     console.error('Contact error:', error);
     res.status(500).json({ error: 'Failed to send message' });
