@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation — PS Security Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #7C3AED;
+            --cyan: #06B6D4;
+            --dark-bg: #0A0A14;
+            --dark-surface: #0D0B1A;
+            --panel: #120E24;
+            --border: rgba(124, 58, 237, 0.06);
+            --grad: linear-gradient(120deg, #7C3AED, #06B6D4);
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: #E0E7FF;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .bg-orbs {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(90px);
+            opacity: 0.1;
+        }
+
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: #7C3AED;
+            top: -100px;
+            left: 10%;
+        }
+
+        .orb-2 {
+            width: 300px;
+            height: 300px;
+            background: #06B6D4;
+            top: 50%;
+            right: 5%;
+        }
+
+        header {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            background: rgba(18, 14, 36, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(124, 58, 237, 0.2);
+            border-radius: 50px;
+            padding: 0.8rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            text-decoration: none;
+            font-weight: 900;
+            font-size: 1.2rem;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--grad);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .logo-text {
+            background: var(--grad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav a {
+            color: #E0E7FF;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s;
+        }
+
+        .nav a:hover {
+            color: var(--cyan);
+        }
+
+        main {
+            margin-top: 100px;
+            padding: 3rem 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: var(--grad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: var(--cyan);
+        }
+
+        p {
+            color: #A5ACBE;
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+
+        .doc-section {
+            background: rgba(18, 14, 36, 0.5);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        code {
+            background: rgba(124, 58, 237, 0.2);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            color: var(--cyan);
+            font-family: monospace;
+        }
+
+        footer {
+            background: rgba(18, 14, 36, 0.6);
+            border-top: 1px solid var(--border);
+            padding: 2rem;
+            text-align: center;
+            color: #6B7280;
+            font-size: 0.85rem;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+    </div>
+
+    <header>
+        <a href="/" class="logo">
+            <div class="logo-icon">🛡️</div>
+            <span class="logo-text">PS</span>
+        </a>
+        <nav class="nav">
+            <a href="/">Home</a>
+            <a href="/about.html">About</a>
+            <a href="/contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Documentation</h1>
+
+        <h2>Getting Started</h2>
+        <div class="doc-section">
+            <p><strong>Quick Start:</strong></p>
+            <ol style="margin-left: 1.5rem; color: #A5ACBE;">
+                <li>Sign up for Kavach v1 (free tier)</li>
+                <li>Create your first canary token</li>
+                <li>Place it where attackers might find it</li>
+                <li>Get alerted the moment it's triggered</li>
+            </ol>
+        </div>
+
+        <h2>Kavach v1</h2>
+        <div class="doc-section">
+            <p><strong>Multi-format canary tokens with real-time attacker fingerprinting.</strong></p>
+            <p>Token types available:</p>
+            <ul style="margin-left: 1.5rem; color: #A5ACBE;">
+                <li>URL Tokens</li>
+                <li>Document Tokens (Word, Excel)</li>
+                <li>API Key Tokens</li>
+                <li>DNS Tokens</li>
+                <li>Email Tokens</li>
+            </ul>
+        </div>
+
+        <h2>Kavach v2</h2>
+        <div class="doc-section">
+            <p><strong>ML-powered reverse proxy with 5-dimensional traffic classification.</strong></p>
+            <p>Deploy via Docker Compose. Automatically routes traffic:</p>
+            <ul style="margin-left: 1.5rem; color: #A5ACBE;">
+                <li>&lt;31 risk score: Forward to real app</li>
+                <li>31-70 risk score: Route to honeypot</li>
+                <li>71-100 risk score: Block & log</li>
+            </ul>
+        </div>
+
+        <h2>Integration</h2>
+        <div class="doc-section">
+            <p><strong>Alert channels supported:</strong></p>
+            <ul style="margin-left: 1.5rem; color: #A5ACBE;">
+                <li>Slack</li>
+                <li>Email (via Resend)</li>
+                <li>Webhooks</li>
+                <li>Datadog</li>
+                <li>Splunk</li>
+            </ul>
+        </div>
+
+        <h2>Need Help?</h2>
+        <p>Email us at <code>support@ps-security.io</code> or <a href="/contact.html" style="color: var(--cyan);">contact us here</a>.</p>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 PS Security Platform. Built with deception. Protect with intelligence.</p>
+    </footer>
+</body>
+</html>

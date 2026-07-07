@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Integrations — PS Security Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #7C3AED;
+            --cyan: #06B6D4;
+            --dark-bg: #0A0A14;
+            --dark-surface: #0D0B1A;
+            --panel: #120E24;
+            --border: rgba(124, 58, 237, 0.06);
+            --grad: linear-gradient(120deg, #7C3AED, #06B6D4);
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: #E0E7FF;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .bg-orbs {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(90px);
+            opacity: 0.1;
+        }
+
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: #7C3AED;
+            top: -100px;
+            left: 10%;
+        }
+
+        .orb-2 {
+            width: 300px;
+            height: 300px;
+            background: #06B6D4;
+            top: 50%;
+            right: 5%;
+        }
+
+        header {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            background: rgba(18, 14, 36, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(124, 58, 237, 0.2);
+            border-radius: 50px;
+            padding: 0.8rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            text-decoration: none;
+            font-weight: 900;
+            font-size: 1.2rem;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--grad);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .logo-text {
+            background: var(--grad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav a {
+            color: #E0E7FF;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s;
+        }
+
+        .nav a:hover {
+            color: var(--cyan);
+        }
+
+        main {
+            margin-top: 100px;
+            padding: 3rem 2rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: var(--grad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: var(--cyan);
+        }
+
+        .integrations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .integration-card {
+            background: linear-gradient(135deg, rgba(18, 14, 36, 0.8) 0%, rgba(18, 14, 36, 0.6) 100%);
+            border: 1px solid rgba(124, 58, 237, 0.1);
+            border-radius: 10px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .integration-card:hover {
+            border-color: rgba(6, 182, 212, 0.4);
+            transform: translateY(-3px);
+        }
+
+        .integration-card h3 {
+            color: var(--cyan);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .integration-card p {
+            color: #A5ACBE;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .status {
+            display: inline-block;
+            background: rgba(6, 182, 212, 0.1);
+            color: var(--cyan);
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .status.coming {
+            background: rgba(236, 72, 153, 0.1);
+            color: #EC4899;
+        }
+
+        footer {
+            background: rgba(18, 14, 36, 0.6);
+            border-top: 1px solid var(--border);
+            padding: 2rem;
+            text-align: center;
+            color: #6B7280;
+            font-size: 0.85rem;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+    </div>
+
+    <header>
+        <a href="/" class="logo">
+            <div class="logo-icon">🛡️</div>
+            <span class="logo-text">PS</span>
+        </a>
+        <nav class="nav">
+            <a href="/">Home</a>
+            <a href="/about.html">About</a>
+            <a href="/docs.html">Docs</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Integrations</h1>
+
+        <h2>Alert Channels</h2>
+        <div class="integrations-grid">
+            <div class="integration-card">
+                <h3>💬 Slack</h3>
+                <p>Real-time alerts in your Slack workspace.</p>
+                <span class="status">Live</span>
+            </div>
+            <div class="integration-card">
+                <h3>📧 Email</h3>
+                <p>Alert via email (Resend powered).</p>
+                <span class="status">Live</span>
+            </div>
+            <div class="integration-card">
+                <h3>🔗 Webhooks</h3>
+                <p>Custom integration via webhooks.</p>
+                <span class="status">Live</span>
+            </div>
+            <div class="integration-card">
+                <h3>📲 Teams</h3>
+                <p>Microsoft Teams integration.</p>
+                <span class="status coming">Coming Soon</span>
+            </div>
+        </div>
+
+        <h2>SIEM & Analytics</h2>
+        <div class="integrations-grid">
+            <div class="integration-card">
+                <h3>📊 Splunk</h3>
+                <p>Forward all events to Splunk SIEM.</p>
+                <span class="status">Live</span>
+            </div>
+            <div class="integration-card">
+                <h3>📈 Datadog</h3>
+                <p>Real-time dashboards in Datadog.</p>
+                <span class="status">Live</span>
+            </div>
+            <div class="integration-card">
+                <h3>📊 Elastic</h3>
+                <p>ELK Stack integration.</p>
+                <span class="status coming">Coming Soon</span>
+            </div>
+            <div class="integration-card">
+                <h3>☁️ Sentinel</h3>
+                <p>Microsoft Sentinel integration.</p>
+                <span class="status coming">Coming Soon</span>
+            </div>
+        </div>
+
+        <h2>Cloud Platforms</h2>
+        <div class="integrations-grid">
+            <div class="integration-card">
+                <h3>☁️ AWS</h3>
+                <p>Deploy on EC2, ECS, or Lambda.</p>
+                <span class="status">Live</span>
+            </div>
+            <div class="integration-card">
+                <h3>☁️ Google Cloud</h3>
+                <p>GCP Compute Engine support.</p>
+                <span class="status">Live</span>
+            </div>
+            <div class="integration-card">
+                <h3>☁️ Azure</h3>
+                <p>Microsoft Azure deployment ready.</p>
+                <span class="status">Live</span>
+            </div>
+            <div class="integration-card">
+                <h3>🐳 Kubernetes</h3>
+                <p>K8s-native honeypots.</p>
+                <span class="status coming">Coming Soon</span>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 PS Security Platform. Built with deception. Protect with intelligence.</p>
+    </footer>
+</body>
+</html>

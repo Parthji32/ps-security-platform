@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact — PS Security Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #7C3AED;
+            --cyan: #06B6D4;
+            --dark-bg: #0A0A14;
+            --dark-surface: #0D0B1A;
+            --panel: #120E24;
+            --border: rgba(124, 58, 237, 0.06);
+            --grad: linear-gradient(120deg, #7C3AED, #06B6D4);
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: #E0E7FF;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .bg-orbs {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(90px);
+            opacity: 0.1;
+        }
+
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: #7C3AED;
+            top: -100px;
+            left: 10%;
+        }
+
+        .orb-2 {
+            width: 300px;
+            height: 300px;
+            background: #06B6D4;
+            top: 50%;
+            right: 5%;
+        }
+
+        header {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            background: rgba(18, 14, 36, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(124, 58, 237, 0.2);
+            border-radius: 50px;
+            padding: 0.8rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            text-decoration: none;
+            font-weight: 900;
+            font-size: 1.2rem;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--grad);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .logo-text {
+            background: var(--grad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav a {
+            color: #E0E7FF;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s;
+        }
+
+        .nav a:hover {
+            color: var(--cyan);
+        }
+
+        main {
+            margin-top: 100px;
+            padding: 3rem 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: var(--grad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .contact-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .contact-card {
+            background: linear-gradient(135deg, rgba(18, 14, 36, 0.8) 0%, rgba(18, 14, 36, 0.6) 100%);
+            border: 1px solid rgba(124, 58, 237, 0.1);
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .contact-card h3 {
+            color: var(--cyan);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-card p {
+            color: #A5ACBE;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-card a {
+            color: var(--cyan);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .contact-card a:hover {
+            text-decoration: underline;
+        }
+
+        .contact-form {
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.1) 0%, rgba(6, 182, 212, 0.1) 100%);
+            border: 1px solid rgba(124, 58, 237, 0.2);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #E0E7FF;
+            font-weight: 500;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 0.7rem;
+            border: 1px solid rgba(124, 58, 237, 0.2);
+            background: rgba(18, 14, 36, 0.8);
+            color: #E0E7FF;
+            border-radius: 6px;
+            font-family: inherit;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--cyan);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            background: var(--grad);
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .submit-btn:hover {
+            filter: brightness(1.1);
+        }
+
+        footer {
+            background: rgba(18, 14, 36, 0.6);
+            border-top: 1px solid var(--border);
+            padding: 2rem;
+            text-align: center;
+            color: #6B7280;
+            font-size: 0.85rem;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+    </div>
+
+    <header>
+        <a href="/" class="logo">
+            <div class="logo-icon">🛡️</div>
+            <span class="logo-text">PS</span>
+        </a>
+        <nav class="nav">
+            <a href="/">Home</a>
+            <a href="/docs.html">Docs</a>
+            <a href="/faq.html">FAQ</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Get In Touch</h1>
+
+        <div class="contact-options">
+            <div class="contact-card">
+                <h3>📧 Email</h3>
+                <p>General inquiries</p>
+                <a href="mailto:hello@ps-security.io">hello@ps-security.io</a>
+            </div>
+            <div class="contact-card">
+                <h3>🔐 Security</h3>
+                <p>Report vulnerability</p>
+                <a href="mailto:security@ps-security.io">security@ps-security.io</a>
+            </div>
+            <div class="contact-card">
+                <h3>💼 Sales</h3>
+                <p>Enterprise & partnerships</p>
+                <a href="mailto:sales@ps-security.io">sales@ps-security.io</a>
+            </div>
+            <div class="contact-card">
+                <h3>🐙 GitHub</h3>
+                <p>Open an issue</p>
+                <a href="https://github.com/Parthji32/ps-security-platform">Visit Repo</a>
+            </div>
+        </div>
+
+        <div class="contact-form">
+            <h2 style="color: var(--cyan); margin-bottom: 1.5rem;">Send us a Message</h2>
+            <form>
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 PS Security Platform. Built with deception. Protect with intelligence.</p>
+    </footer>
+</body>
+</html>

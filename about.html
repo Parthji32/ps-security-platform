@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About PS — Deception Security Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #7C3AED;
+            --cyan: #06B6D4;
+            --dark-bg: #0A0A14;
+            --dark-surface: #0D0B1A;
+            --panel: #120E24;
+            --border: rgba(124, 58, 237, 0.06);
+            --grad: linear-gradient(120deg, #7C3AED, #06B6D4);
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: #E0E7FF;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .bg-orbs {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(90px);
+            opacity: 0.1;
+        }
+
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: #7C3AED;
+            top: -100px;
+            left: 10%;
+        }
+
+        .orb-2 {
+            width: 300px;
+            height: 300px;
+            background: #06B6D4;
+            top: 50%;
+            right: 5%;
+        }
+
+        header {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            background: rgba(18, 14, 36, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(124, 58, 237, 0.2);
+            border-radius: 50px;
+            padding: 0.8rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            text-decoration: none;
+            font-weight: 900;
+            font-size: 1.2rem;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--grad);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .logo-text {
+            background: var(--grad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav a {
+            color: #E0E7FF;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s;
+        }
+
+        .nav a:hover {
+            color: var(--cyan);
+        }
+
+        .cta-btn {
+            background: var(--grad);
+            color: white;
+            border: none;
+            padding: 0.6rem 1.3rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+
+        main {
+            margin-top: 100px;
+            padding: 3rem 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 2rem;
+            background: var(--grad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: var(--cyan);
+        }
+
+        p {
+            color: #A5ACBE;
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+
+        .vision-box {
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.1) 0%, rgba(6, 182, 212, 0.1) 100%);
+            border: 1px solid rgba(124, 58, 237, 0.2);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        ul {
+            margin: 1.5rem 0 1.5rem 2rem;
+            color: #A5ACBE;
+        }
+
+        li {
+            margin-bottom: 0.7rem;
+        }
+
+        footer {
+            background: rgba(18, 14, 36, 0.6);
+            border-top: 1px solid var(--border);
+            padding: 2rem;
+            text-align: center;
+            color: #6B7280;
+            font-size: 0.85rem;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 0.6rem 1rem;
+                gap: 1rem;
+            }
+
+            .nav {
+                display: none;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            main {
+                padding: 2rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+    </div>
+
+    <header>
+        <a href="/" class="logo">
+            <div class="logo-icon">🛡️</div>
+            <span class="logo-text">PS</span>
+        </a>
+        <nav class="nav">
+            <a href="/">Home</a>
+            <a href="/docs.html">Docs</a>
+            <a href="/contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1>About PS Security</h1>
+
+        <h2>Our Mission</h2>
+        <p>We believe deception is the future of cybersecurity. In a world where attackers move faster than defenses can react, we're building the platform that turns the tables: intelligence-driven deception that catches threats before they cause damage.</p>
+
+        <div class="vision-box">
+            <strong>Vision:</strong> A world where every security team can deploy enterprise-grade deception technology, regardless of budget or technical expertise.
+        </div>
+
+        <h2>What We Do</h2>
+        <p>PS Security Platform is a suite of deception technology products designed to help security teams detect threats early, reduce false positives, and extract actionable threat intelligence.</p>
+
+        <h2>Our Values</h2>
+        <ul>
+            <li><strong>Transparency:</strong> Real data only. No fake metrics.</li>
+            <li><strong>Simplicity:</strong> Deploy in minutes, not months.</li>
+            <li><strong>Effectiveness:</strong> Zero false positives. Every alert is a real threat.</li>
+            <li><strong>Accessibility:</strong> Free tier for individuals. Enterprise-grade for everyone.</li>
+        </ul>
+
+        <h2>Built By</h2>
+        <p>PS Security Platform is built by Parth Jindal, a security engineer passionate about deception technology and making enterprise security tools accessible to everyone.</p>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 PS Security Platform. Built with deception. Protect with intelligence.</p>
+    </footer>
+</body>
+</html>
