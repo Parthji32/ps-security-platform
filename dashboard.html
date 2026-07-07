@@ -12,8 +12,9 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: #0A0A14;
             color: #cbd5e1;
-            height: 100vh;
-            display: flex;
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            min-height: 100vh;
         }
         
         :root {
@@ -27,263 +28,303 @@
             --border: rgba(124, 58, 237, 0.14);
         }
         
-        /* Sidebar */
+        /* ===== SIDEBAR ===== */
         .sidebar {
-            width: 250px;
             background: var(--dark-surface);
             border-right: 1px solid var(--border);
-            padding: 20px;
+            padding: 25px 20px;
+            height: 100vh;
             overflow-y: auto;
-            flex-shrink: 0;
+            position: sticky;
+            top: 0;
         }
         
-        .sidebar-logo {
-            font-size: 18px;
+        .logo {
+            font-size: 20px;
             font-weight: 900;
             color: var(--text-primary);
-            margin-bottom: 30px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .sidebar-section {
-            margin-bottom: 30px;
-        }
-        
-        .sidebar-label {
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            color: #64748b;
-            letter-spacing: 1px;
-            margin-bottom: 12px;
-        }
-        
-        .sidebar-link {
+            margin-bottom: 35px;
             display: flex;
             align-items: center;
             gap: 10px;
-            padding: 10px 12px;
+            letter-spacing: -0.5px;
+        }
+        
+        .nav-section {
+            margin-bottom: 35px;
+        }
+        
+        .nav-label {
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: #64748b;
+            letter-spacing: 1.2px;
+            margin-bottom: 14px;
+            display: block;
+        }
+        
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            padding: 11px 14px;
+            margin-bottom: 6px;
             border-radius: 8px;
             color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 13px;
-            transition: all 0.2s;
-            border-left: 2px solid transparent;
             cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            border-left: 3px solid transparent;
             background: transparent;
             border: none;
             width: 100%;
             text-align: left;
         }
         
-        .sidebar-link:hover {
-            background: rgba(124, 58, 237, 0.1);
-            color: var(--text-primary);
-        }
-        
-        .sidebar-link.active {
+        .nav-item:hover {
             background: rgba(124, 58, 237, 0.12);
-            border-left-color: var(--primary);
             color: var(--text-primary);
+            border-left-color: var(--primary);
         }
         
-        .deploy-btn {
+        .nav-item.active {
+            background: rgba(124, 58, 237, 0.15);
+            color: var(--text-primary);
+            border-left-color: var(--primary);
+            box-shadow: inset -3px 0 0 var(--primary);
+        }
+        
+        .nav-item span:first-child {
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+        
+        .deploy-button {
             width: 100%;
-            padding: 12px;
-            margin-top: 40px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 14px 16px;
+            margin-top: 50px;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #7C3AED 0%, #06B6D4 100%);
             color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: 10px;
             font-weight: 700;
             font-size: 13px;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(124, 58, 237, 0.25);
         }
         
-        .deploy-btn:hover {
+        .deploy-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(124, 58, 237, 0.3);
+            box-shadow: 0 8px 25px rgba(124, 58, 237, 0.35);
         }
         
         .grid-status {
             text-align: center;
-            font-size: 11px;
+            font-size: 12px;
             color: #64748b;
-            margin-top: 12px;
+            padding: 0 14px;
         }
         
-        /* Main Content */
-        .main-container {
-            flex: 1;
+        /* ===== MAIN CONTENT ===== */
+        .main {
             display: flex;
             flex-direction: column;
-            overflow: hidden;
+            background: var(--dark-bg);
         }
         
         .header {
             background: var(--dark-surface);
             border-bottom: 1px solid var(--border);
-            padding: 20px 30px;
+            padding: 24px 32px;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            gap: 30px;
+        }
+        
+        .header-title h1 {
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+            letter-spacing: -0.5px;
+        }
+        
+        .header-title p {
+            font-size: 13px;
+            color: #64748b;
+            font-weight: 500;
+        }
+        
+        .status-badge {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(16, 185, 129, 0.12);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: #10b981;
+            padding: 10px 18px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 700;
+            white-space: nowrap;
             flex-shrink: 0;
         }
         
-        .header-left h1 {
-            font-size: 24px;
-            font-weight: 900;
-            color: var(--text-primary);
-            margin-bottom: 4px;
-        }
-        
-        .header-left p {
-            font-size: 12px;
-            color: #64748b;
-        }
-        
-        .live-badge {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(16, 185, 129, 0.1);
-            border: 1px solid rgba(16, 185, 129, 0.3);
-            color: #10b981;
-            padding: 8px 16px;
-            border-radius: 50px;
-            font-size: 12px;
-            font-weight: 600;
-        }
-        
-        .live-dot {
-            width: 6px;
-            height: 6px;
+        .pulse-dot {
+            width: 7px;
+            height: 7px;
             background: #10b981;
             border-radius: 50%;
-            animation: pulse 2s ease-in-out infinite;
+            animation: pulse 2.5s ease-in-out infinite;
         }
         
         @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.2); }
         }
         
-        /* Content Area */
+        /* ===== CONTENT ===== */
         .content {
             flex: 1;
             overflow-y: auto;
-            padding: 30px;
+            padding: 32px;
         }
         
-        /* KPI Grid */
-        .kpi-grid {
+        .kpi-row {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 24px;
+            margin-bottom: 36px;
         }
         
-        .kpi-card {
-            background: var(--dark-surface);
+        .kpi {
+            background: linear-gradient(160deg, rgba(124, 58, 237, 0.05), rgba(6, 182, 212, 0.02));
             border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 24px;
+            border-radius: 14px;
+            padding: 28px;
+            transition: all 0.3s;
         }
         
-        .kpi-card h3 {
-            font-size: 13px;
-            font-weight: 600;
-            color: #64748b;
+        .kpi:hover {
+            border-color: var(--secondary);
+            box-shadow: 0 8px 24px rgba(6, 182, 212, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .kpi-label {
+            font-size: 12px;
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 10px;
+            color: #64748b;
+            letter-spacing: 0.8px;
+            margin-bottom: 12px;
         }
         
         .kpi-value {
-            font-size: 36px;
+            font-size: 44px;
             font-weight: 900;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background: linear-gradient(135deg, #7C3AED, #06B6D4);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            letter-spacing: -1px;
         }
         
-        /* Section */
-        .section {
-            background: var(--dark-surface);
+        .card {
+            background: linear-gradient(160deg, rgba(124, 58, 237, 0.04), rgba(6, 182, 212, 0.02));
             border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 30px;
-            margin-bottom: 30px;
+            border-radius: 14px;
+            padding: 32px;
+            margin-bottom: 28px;
         }
         
-        .section-title {
-            font-size: 18px;
+        .card-title {
+            font-size: 20px;
             font-weight: 900;
             color: var(--text-primary);
-            margin-bottom: 20px;
+            margin-bottom: 24px;
+            letter-spacing: -0.5px;
         }
         
-        .topology-box {
-            height: 250px;
-            background: rgba(124, 58, 237, 0.05);
+        .topology-visual {
+            height: 280px;
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.08), rgba(6, 182, 212, 0.04));
             border: 2px dashed var(--border);
-            border-radius: 8px;
+            border-radius: 12px;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
+            gap: 10px;
+            margin-bottom: 24px;
             color: #64748b;
             font-size: 14px;
-            margin-bottom: 20px;
+            font-weight: 500;
         }
         
         .controls {
             display: flex;
-            gap: 12px;
+            gap: 14px;
             flex-wrap: wrap;
         }
         
         .btn {
-            padding: 12px 24px;
-            border-radius: 8px;
+            padding: 12px 28px;
+            border-radius: 10px;
             font-size: 13px;
             font-weight: 700;
             border: none;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.3s;
+            white-space: nowrap;
         }
         
         .btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background: linear-gradient(135deg, #7C3AED, #06B6D4);
             color: white;
+            box-shadow: 0 4px 15px rgba(124, 58, 237, 0.25);
         }
         
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(124, 58, 237, 0.3);
+            box-shadow: 0 8px 25px rgba(124, 58, 237, 0.35);
         }
         
-        .btn-ghost {
+        .btn-secondary {
             background: transparent;
             color: var(--text-primary);
-            border: 1px solid var(--border);
+            border: 1.5px solid var(--border);
         }
         
-        .btn-ghost:hover {
+        .btn-secondary:hover {
             border-color: var(--secondary);
-            background: rgba(6, 182, 212, 0.1);
+            background: rgba(6, 182, 212, 0.08);
+            transform: translateY(-2px);
         }
         
-        /* Activity Feed */
+        .activity-feed {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        
         .activity-item {
-            padding: 16px 0;
+            padding: 20px;
             border-bottom: 1px solid var(--border);
             display: flex;
             justify-content: space-between;
             align-items: start;
+            gap: 20px;
+            transition: all 0.2s;
+        }
+        
+        .activity-item:hover {
+            background: rgba(124, 58, 237, 0.05);
         }
         
         .activity-item:last-child {
@@ -294,216 +335,271 @@
             flex: 1;
         }
         
-        .activity-text .title {
-            font-size: 13px;
+        .activity-title {
+            font-size: 14px;
+            font-weight: 700;
             color: var(--text-primary);
-            margin-bottom: 4px;
+            margin-bottom: 6px;
         }
         
-        .activity-time {
+        .activity-desc {
             font-size: 12px;
             color: #64748b;
+            line-height: 1.5;
         }
         
-        .activity-badge {
-            padding: 4px 12px;
-            border-radius: 20px;
+        .severity-badge {
+            padding: 6px 14px;
+            border-radius: 8px;
             font-size: 11px;
-            font-weight: 600;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+            flex-shrink: 0;
         }
         
-        .badge-red {
+        .severity-critical {
             background: rgba(239, 68, 68, 0.15);
             color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.3);
         }
         
-        .badge-yellow {
+        .severity-warning {
             background: rgba(245, 158, 11, 0.15);
             color: #f59e0b;
+            border: 1px solid rgba(245, 158, 11, 0.3);
         }
         
-        .badge-green {
+        .severity-info {
             background: rgba(16, 185, 129, 0.15);
             color: #10b981;
+            border: 1px solid rgba(16, 185, 129, 0.3);
         }
         
-        /* Responsive */
+        /* ===== SCROLLBAR ===== */
+        .sidebar::-webkit-scrollbar,
+        .content::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .sidebar::-webkit-scrollbar-track,
+        .content::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        
+        .sidebar::-webkit-scrollbar-thumb,
+        .content::-webkit-scrollbar-thumb {
+            background: rgba(124, 58, 237, 0.2);
+            border-radius: 3px;
+        }
+        
+        .sidebar::-webkit-scrollbar-thumb:hover,
+        .content::-webkit-scrollbar-thumb:hover {
+            background: rgba(124, 58, 237, 0.4);
+        }
+        
+        /* ===== RESPONSIVE ===== */
         @media (max-width: 1024px) {
-            .sidebar {
-                width: 200px;
+            body {
+                grid-template-columns: 240px 1fr;
             }
             
-            .kpi-grid {
+            .header {
+                flex-wrap: wrap;
+                gap: 16px;
+            }
+            
+            .kpi-row {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
         
         @media (max-width: 768px) {
             body {
-                flex-direction: column;
+                grid-template-columns: 1fr;
             }
             
             .sidebar {
-                width: 100%;
-                max-height: 200px;
+                height: auto;
                 border-right: none;
                 border-bottom: 1px solid var(--border);
-                overflow-x: auto;
-                display: flex;
-                gap: 20px;
+                padding: 20px;
+                position: static;
             }
             
-            .main-container {
-                height: 100%;
+            .main {
+                min-height: calc(100vh - auto);
             }
             
-            .kpi-grid {
+            .kpi-row {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 16px;
+            }
+            
+            .kpi {
+                padding: 20px;
+            }
+            
+            .kpi-value {
+                font-size: 32px;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .header {
+                padding: 18px 20px;
+                flex-direction: column;
+                align-items: flex-start;
             }
             
             .controls {
-                flex-direction: column;
+                width: 100%;
             }
             
             .btn {
-                width: 100%;
+                flex: 1;
+                min-width: 140px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Sidebar -->
+    <!-- SIDEBAR -->
     <div class="sidebar">
-        <div class="sidebar-logo">🛡️ Kavach v2</div>
+        <div class="logo">🛡️ Kavach v2</div>
         
-        <div class="sidebar-section">
-            <div class="sidebar-label">Management</div>
-            <button class="sidebar-link active">
+        <div class="nav-section">
+            <label class="nav-label">Management</label>
+            <button class="nav-item active">
                 <span>🔗</span> Topology View
             </button>
-            <button class="sidebar-link">
+            <button class="nav-item">
                 <span>🍯</span> Active Traps
             </button>
-            <button class="sidebar-link">
+            <button class="nav-item">
                 <span>📬</span> Interaction Feed
             </button>
-            <button class="sidebar-link">
+            <button class="nav-item">
                 <span>🚀</span> Deployment
             </button>
         </div>
         
-        <div class="sidebar-section">
-            <div class="sidebar-label">Templates</div>
-            <button class="sidebar-link">
+        <div class="nav-section">
+            <label class="nav-label">Templates</label>
+            <button class="nav-item">
                 <span>🖥️</span> SSH Server
             </button>
-            <button class="sidebar-link">
+            <button class="nav-item">
                 <span>🌐</span> Web Portal
             </button>
-            <button class="sidebar-link">
+            <button class="nav-item">
                 <span>💾</span> Database
             </button>
-            <button class="sidebar-link">
+            <button class="nav-item">
                 <span>📷</span> IoT Camera
             </button>
         </div>
         
-        <button class="deploy-btn">+ Deploy Honeypot</button>
+        <button class="deploy-button">+ Deploy Honeypot</button>
         <div class="grid-status">Grid healthy ✓</div>
     </div>
     
-    <!-- Main Content -->
-    <div class="main-container">
-        <!-- Header -->
+    <!-- MAIN CONTENT -->
+    <div class="main">
+        <!-- HEADER -->
         <div class="header">
-            <div class="header-left">
+            <div class="header-title">
                 <h1>Honeypot Control Center</h1>
                 <p>Real-time deception layer management</p>
             </div>
-            <div class="live-badge">
-                <div class="live-dot"></div>
+            <div class="status-badge">
+                <div class="pulse-dot"></div>
                 <span>7 Active Intrusions</span>
             </div>
         </div>
         
-        <!-- Content Area -->
+        <!-- CONTENT -->
         <div class="content">
-            <!-- KPI Cards -->
-            <div class="kpi-grid">
-                <div class="kpi-card">
-                    <h3>Total Requests</h3>
+            <!-- KPI CARDS -->
+            <div class="kpi-row">
+                <div class="kpi">
+                    <div class="kpi-label">Total Requests</div>
                     <div class="kpi-value">2,847</div>
                 </div>
-                <div class="kpi-card">
-                    <h3>Honeypots Active</h3>
+                <div class="kpi">
+                    <div class="kpi-label">Honeypots Active</div>
                     <div class="kpi-value">18/20</div>
                 </div>
-                <div class="kpi-card">
-                    <h3>Attacks Blocked</h3>
+                <div class="kpi">
+                    <div class="kpi-label">Attacks Blocked</div>
                     <div class="kpi-value">342</div>
                 </div>
-                <div class="kpi-card">
-                    <h3>Detection Rate</h3>
+                <div class="kpi">
+                    <div class="kpi-label">Detection Rate</div>
                     <div class="kpi-value">99.8%</div>
                 </div>
             </div>
             
-            <!-- Honeypot Topology Section -->
-            <div class="section">
-                <h2 class="section-title">🔗 Honeypot Topology</h2>
-                <div class="topology-box">
-                    Interactive honeypot topology visualization
-                    <br><em style="font-size: 12px; opacity: 0.6;">SVG network diagram coming soon</em>
+            <!-- TOPOLOGY CARD -->
+            <div class="card">
+                <h2 class="card-title">🔗 Honeypot Topology</h2>
+                <div class="topology-visual">
+                    <div>Interactive honeypot network visualization</div>
+                    <div style="font-size: 12px; opacity: 0.6;">SVG topology diagram coming soon</div>
                 </div>
                 <div class="controls">
                     <button class="btn btn-primary">Refresh Map</button>
-                    <button class="btn btn-ghost">Export Topology</button>
-                    <a href="index.html" class="btn btn-ghost" style="text-decoration: none;">← Back to Home</a>
+                    <button class="btn btn-secondary">Export Topology</button>
+                    <a href="index.html" class="btn btn-secondary" style="text-decoration: none;">← Back to Home</a>
                 </div>
             </div>
             
-            <!-- Activity Feed Section -->
-            <div class="section">
-                <h2 class="section-title">📊 Recent Activity</h2>
-                
-                <div class="activity-item">
-                    <div class="activity-text">
-                        <div class="title">🔴 SSH Honeypot Triggered</div>
-                        <div class="activity-time">Brute force attack detected from 185.220.101.45</div>
+            <!-- ACTIVITY FEED -->
+            <div class="card">
+                <h2 class="card-title">📊 Recent Activity</h2>
+                <div class="activity-feed">
+                    <div class="activity-item">
+                        <div class="activity-text">
+                            <div class="activity-title">🔴 SSH Honeypot Triggered</div>
+                            <div class="activity-desc">Brute force attack from 185.220.101.45 (TOR Exit Node)</div>
+                        </div>
+                        <span class="severity-badge severity-critical">Critical</span>
                     </div>
-                    <span class="activity-badge badge-red">Critical</span>
-                </div>
-                
-                <div class="activity-item">
-                    <div class="activity-text">
-                        <div class="title">🟡 Web Portal - Reconnaissance</div>
-                        <div class="activity-time">Multiple GET requests to /admin, /config, /backup paths</div>
+                    
+                    <div class="activity-item">
+                        <div class="activity-text">
+                            <div class="activity-title">🟡 Web Portal - Reconnaissance</div>
+                            <div class="activity-desc">GET requests to /admin, /config, /backup paths detected</div>
+                        </div>
+                        <span class="severity-badge severity-warning">Warning</span>
                     </div>
-                    <span class="activity-badge badge-yellow">Warning</span>
-                </div>
-                
-                <div class="activity-item">
-                    <div class="activity-text">
-                        <div class="title">🔴 SQL Database Honeypot - Injection Attempt</div>
-                        <div class="activity-time">SQL injection payload: ' OR '1'='1 -- detected</div>
+                    
+                    <div class="activity-item">
+                        <div class="activity-text">
+                            <div class="activity-title">🔴 SQL Injection - Database Honeypot</div>
+                            <div class="activity-desc">Payload detected: ' OR '1'='1 -- from 203.0.113.42</div>
+                        </div>
+                        <span class="severity-badge severity-critical">Critical</span>
                     </div>
-                    <span class="activity-badge badge-red">Critical</span>
-                </div>
-                
-                <div class="activity-item">
-                    <div class="activity-text">
-                        <div class="title">🟢 SMB Share - Active Monitoring</div>
-                        <div class="activity-time">Normal enumeration activity detected</div>
+                    
+                    <div class="activity-item">
+                        <div class="activity-text">
+                            <div class="activity-title">🟢 SMB Share - Normal Activity</div>
+                            <div class="activity-desc">Enumeration activity within expected parameters</div>
+                        </div>
+                        <span class="severity-badge severity-info">Info</span>
                     </div>
-                    <span class="activity-badge badge-green">Info</span>
-                </div>
-                
-                <div class="activity-item">
-                    <div class="activity-text">
-                        <div class="title">🟡 DNS Honeypot - Query Anomaly</div>
-                        <div class="activity-time">Unusual query pattern from 203.0.113.42</div>
+                    
+                    <div class="activity-item">
+                        <div class="activity-text">
+                            <div class="activity-title">🟡 DNS Honeypot - Query Anomaly</div>
+                            <div class="activity-desc">Unusual query pattern from 192.0.2.15 detected</div>
+                        </div>
+                        <span class="severity-badge severity-warning">Warning</span>
                     </div>
-                    <span class="activity-badge badge-yellow">Warning</span>
                 </div>
             </div>
         </div>
