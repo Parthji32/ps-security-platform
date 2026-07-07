@@ -1,10 +1,4 @@
-/**
- * Vercel API Route: /api/metrics
- * Fetches real metrics from Kavach v2 AWS instance
- * Falls back to demo data if unreachable
- */
-
-export default async function handler(req, res) {
+module.exports = (req, res) => {
   // Enable CORS
   res.setHeader('Access-Control-Allow-Credentials', 'true');
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -16,8 +10,7 @@ export default async function handler(req, res) {
     return;
   }
 
-  // For now, return demo metrics (Approach 1)
-  // In Phase 2, this will query real Kavach v2 instance
+  // Demo metrics (Approach 1 - no backend required)
   const demoMetrics = {
     detection_rate: 99.8,
     attacks_blocked: 3847,
@@ -33,6 +26,6 @@ export default async function handler(req, res) {
     source: 'demo',
     timestamp: new Date().toISOString()
   };
-  console.log('[DEMO MODE] Returning demo metrics');
-  return res.status(200).json(demoMetrics);
-}
+
+  res.status(200).json(demoMetrics);
+};
