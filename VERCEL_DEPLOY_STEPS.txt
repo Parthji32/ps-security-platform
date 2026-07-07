@@ -1,0 +1,112 @@
+🚀 DEPLOY TO VERCEL - EXACT STEPS
+═══════════════════════════════════════════════════════════════════
+
+STEP 1: FIX AWS SECURITY GROUP (5 minutes)
+──────────────────────────────────────────
+
+1. Go to: https://console.aws.amazon.com
+2. EC2 → Instances
+3. Click your instance: 3.80.122.16
+4. Security → Security Groups
+5. Click your security group (sg-xxx)
+6. Inbound Rules → Edit Inbound Rules
+7. Add rule:
+   - Type: Custom TCP
+   - Port: 3000
+   - Source: 0.0.0.0/0
+8. Save
+
+Wait 30 seconds.
+
+Test in PowerShell:
+  Test-NetConnection -ComputerName 3.80.122.16 -Port 3000
+  
+Should show: TcpTestSucceeded : True ✅
+
+
+STEP 2: UPDATE YOUR GITHUB REPO (5 minutes)
+──────────────────────────────────────────
+
+In E:\demo, you have these new files ready:
+  - api/metrics.js (Vercel backend endpoint)
+  - index-vercel.html (updated homepage)
+
+Add them to git:
+
+  cd E:\demo
+  git add api/metrics.js index-vercel.html
+  git commit -m "Add: Real metrics from Kavach v2"
+  git push origin main
+
+Done. Your GitHub repo now has the backend code.
+
+
+STEP 3: CONNECT TO VERCEL (10 minutes)
+──────────────────────────────────────
+
+1. Go to: https://vercel.com
+2. Click "Sign Up" (use GitHub)
+3. Authorize with GitHub
+4. Click "New Project"
+5. Select: ps-security-platform repo
+6. Click "Import"
+7. Framework: Other (or leave blank)
+8. Click "Deploy"
+
+Wait ~2 minutes. Vercel deploys automatically.
+
+When done, you'll see a live URL like:
+  https://ps-security-platform-xxxxx.vercel.app
+
+
+STEP 4: SET ENVIRONMENT VARIABLE (2 minutes)
+──────────────────────────────────────────
+
+1. In Vercel dashboard, click your project
+2. Settings → Environment Variables
+3. Add: (optional - Vercel can already reach AWS)
+   Key: KAVACH_URL
+   Value: http://3.80.122.16:3000
+4. Save
+
+Actually you don't need this - it's hardcoded in the API.
+
+
+STEP 5: TEST IT WORKS (5 minutes)
+──────────────────────────────────
+
+Visit: https://ps-security-platform-xxxxx.vercel.app
+
+You should see:
+  ✅ Beautiful homepage
+  ✅ Stats section loading
+  ✅ Real numbers from your Kavach v2
+
+If stats show loading forever:
+  - Check AWS security group is open (port 3000)
+  - Wait 1 minute
+  - Refresh page
+
+
+STEP 6: UPDATE YOUR DNS / DOMAIN LATER (for next week)
+──────────────────────────────────────────────────────
+
+Once you buy ps.io or another domain, you just point it at Vercel.
+Vercel handles SSL automatically.
+
+No extra work needed for now.
+
+
+THAT'S IT!
+══════════════════════════════════════════════════════════════════
+
+Your website is now:
+  ✅ Live on Vercel (fast, professional)
+  ✅ Shows REAL metrics from your Kavach v2
+  ✅ Auto-updates every 30 seconds
+  ✅ Ready to show investors
+  ✅ FREE (Vercel free tier)
+
+Do steps 1-3 right now. Should take 20 minutes total.
+
+Then your startup is LIVE with REAL DATA.

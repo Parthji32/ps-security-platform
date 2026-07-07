@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation - PS Security Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #7C3AED;
+            --cyan: #06B6D4;
+            --dark-bg: #0A0A14;
+            --dark-surface: #0D0B1A;
+            --panel: #120E24;
+            --border: rgba(124, 58, 237, 0.14);
+            --grad: linear-gradient(120deg, #7C3AED, #06B6D4);
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: #E0E7FF;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(10, 10, 20, 0.7);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            padding: 1.2rem 2rem;
+        }
+
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            background: var(--grad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .nav {
+            display: flex;
+            gap: 2rem;
+            flex: 1;
+            margin-left: 3rem;
+        }
+
+        .nav a {
+            color: #E0E7FF;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .cta-btn {
+            background: var(--grad);
+            color: white;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        main {
+            margin-top: 80px;
+            padding: 3rem 2rem;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: var(--grad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: var(--cyan);
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.7rem;
+            color: #E0E7FF;
+        }
+
+        p {
+            color: #C7D2FE;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .doc-section {
+            background: rgba(18, 14, 36, 0.5);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        code {
+            background: rgba(124, 58, 237, 0.2);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #A5F3FC;
+        }
+
+        pre {
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+            color: #A5F3FC;
+        }
+
+        a {
+            color: var(--cyan);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            background: rgba(18, 14, 36, 0.8);
+            border-top: 1px solid var(--border);
+            padding: 2rem;
+            text-align: center;
+            color: #8B7E99;
+            margin-top: 3rem;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            main {
+                padding: 2rem 1rem;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            h2 {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="/" class="logo">🛡️ PS Security</a>
+            <nav class="nav">
+                <a href="/">Home</a>
+                <a href="/about.html">About</a>
+                <a href="/product.html">Products</a>
+            </nav>
+            <button class="cta-btn" onclick="window.location='/product.html'">Get Started</button>
+        </div>
+    </header>
+
+    <main>
+        <h1>Documentation</h1>
+        <p>Learn how to deploy, integrate, and manage PS Security Platform products.</p>
+
+        <h2>Getting Started</h2>
+
+        <div class="doc-section">
+            <h3>Quick Start</h3>
+            <ol style="margin-left: 1.5rem; color: #C7D2FE;">
+                <li>Sign up for a free Kavach v1 account</li>
+                <li>Create your first canary token (URL, API Key, or Document)</li>
+                <li>Place it somewhere an attacker might find it</li>
+                <li>Get alerted the moment someone touches it</li>
+            </ol>
+            <p style="margin-top: 1rem;"><code>canarytokens.com</code> provides free canary tokens with no signup required.</p>
+        </div>
+
+        <h2>Kavach v1</h2>
+
+        <div class="doc-section">
+            <h3>Overview</h3>
+            <p>
+                Kavach v1 is a multi-format canary token platform with real-time attacker fingerprinting. 
+                Deploy fake credentials, documents, and APIs to catch unauthorized access.
+            </p>
+            <h3>Token Types</h3>
+            <ul style="margin-left: 1.5rem;">
+                <li><strong>URL Token:</strong> Alert when visited</li>
+                <li><strong>Document Token:</strong> Embed in Word/Excel, alert on open</li>
+                <li><strong>API Key Token:</strong> Fake AWS/GCP credentials</li>
+                <li><strong>DNS Token:</strong> Alert on DNS lookup</li>
+                <li><strong>Email Token:</strong> Respond with tracking pixel or link</li>
+            </ul>
+            <h3>Attacker Fingerprinting</h3>
+            <p>
+                When a token is triggered, we capture:
+            </p>
+            <ul style="margin-left: 1.5rem;">
+                <li>IP address & geolocation (via ipinfo.io)</li>
+                <li>Browser & OS information</li>
+                <li>TLS/SSL certificate details</li>
+                <li>Network metadata (AS number, ISP)</li>
+                <li>Timestamp & request headers</li>
+            </ul>
+        </div>
+
+        <h2>Kavach v2</h2>
+
+        <div class="doc-section">
+            <h3>Architecture</h3>
+            <p>
+                Kavach v2 is an ML-powered reverse proxy that classifies incoming traffic across 5 dimensions:
+            </p>
+            <ul style="margin-left: 1.5rem;">
+                <li>IP Reputation (0-20 points)</li>
+                <li>Request Pattern Analysis (0-20 points)</li>
+                <li>Payload Analysis (0-20 points)</li>
+                <li>Header/Fingerprinting (0-20 points)</li>
+                <li>Behavioral Anomalies (0-20 points)</li>
+            </ul>
+            <p style="margin-top: 1rem;">
+                Total score: 0-100. Routing:
+                <ul style="margin-left: 1.5rem;">
+                    <li>&lt;31: Safe → Forward to real app</li>
+                    <li>31-70: Suspicious → Honeypot (log & study)</li>
+                    <li>71-100: Attacker → Full honeypot + blocking</li>
+                </ul>
+            </p>
+
+            <h3>Deployment</h3>
+            <p>Kavach v2 ships as Docker Compose (Go + Python):</p>
+            <pre>docker-compose up -d</pre>
+            <p>Services:</p>
+            <ul style="margin-left: 1.5rem;">
+                <li><code>kavach-server</code> – Go reverse proxy (port 3000)</li>
+                <li><code>kavach-token-manager</code> – Python FastAPI agent (port 9001)</li>
+                <li><code>kavach-website-generator</code> – Python honeypot mirror (port 9002)</li>
+            </ul>
+        </div>
+
+        <h2>Integrations</h2>
+
+        <div class="doc-section">
+            <h3>Alert Channels</h3>
+            <ul style="margin-left: 1.5rem;">
+                <li><strong>Slack:</strong> Get alerts in your Slack workspace in real time</li>
+                <li><strong>Email:</strong> Traditional email alerts via SMTP/Resend</li>
+                <li><strong>Webhooks:</strong> POST to your own backend for custom handling</li>
+                <li><strong>Datadog:</strong> Forward all events to Datadog for correlation</li>
+                <li><strong>Splunk:</strong> SIEM integration for centralized logging</li>
+            </ul>
+
+            <h3>Coming Soon</h3>
+            <ul style="margin-left: 1.5rem;">
+                <li>Microsoft Teams</li>
+                <li>PagerDuty (for on-call integration)</li>
+                <li>SIEM/SOAR via STIX/TAXII</li>
+            </ul>
+        </div>
+
+        <h2>API Reference</h2>
+
+        <div class="doc-section">
+            <h3>Authentication</h3>
+            <p>All API requests require Bearer token authentication:</p>
+            <pre>Authorization: Bearer YOUR_API_KEY</pre>
+
+            <h3>Endpoints</h3>
+            <p><strong>POST /api/tokens/create</strong> – Create a new canary token</p>
+            <pre>{
+  "type": "url",
+  "name": "Production DB Creds"
+}</pre>
+
+            <p><strong>GET /api/tokens/:id</strong> – Get token details and triggers</p>
+
+            <p><strong>GET /api/attacks</strong> – List all attack events</p>
+
+            <p><strong>POST /api/webhooks/add</strong> – Register webhook endpoint</p>
+        </div>
+
+        <h2>Security & Compliance</h2>
+
+        <div class="doc-section">
+            <h3>Data Protection</h3>
+            <p>
+                All traffic is encrypted in transit (TLS 1.3). At-rest encryption with AES-256. 
+                Compliance: SOC 2 Type II, ISO 27001, GDPR.
+            </p>
+
+            <h3>Privacy</h3>
+            <p>
+                We never store your real application data. Only token events and attacker fingerprints are logged.
+                You own your data. Export anytime.
+            </p>
+        </div>
+
+        <h2>Support</h2>
+
+        <div class="doc-section">
+            <p>
+                <strong>Questions?</strong> <a href="/contact.html">Contact us</a> or email <code>support@ps-security.io</code>
+            </p>
+            <p>
+                <strong>Bug report?</strong> Open an issue on <a href="https://github.com/Parthji32/ps-security-platform">GitHub</a>
+            </p>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 PS Security Platform. All rights reserved.</p>
+    </footer>
+</body>
+</html>
