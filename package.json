@@ -1,31 +1,24 @@
 {
-  "name": "ps-security-website",
+  "name": "ps-security-backend",
   "version": "1.0.0",
-  "description": "PS — Deception Security Platform",
-  "main": "api.js",
+  "description": "PS Security Platform - Email signup & API backend",
+  "main": "email-signup-backend.js",
+  "type": "module",
   "scripts": {
-    "dev": "node api.js",
-    "start": "node api.js",
-    "build": "echo 'Static site - no build needed'"
+    "start": "node email-signup-backend.js",
+    "dev": "node email-signup-backend.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [
-    "security",
-    "honeypot",
-    "deception",
-    "threat-intelligence"
-  ],
-  "author": "PS Security",
+  "keywords": ["security", "honeypot", "deception", "kavach"],
+  "author": "Parth Jindal",
   "license": "MIT",
   "dependencies": {
     "express": "^4.18.2",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
-    "nodemailer": "^6.9.7"
+    "resend": "^3.0.0"
   },
   "devDependencies": {
-    "nodemon": "^3.0.1"
-  },
-  "engines": {
-    "node": ">=18.0.0"
+    "@vercel/node": "^3.0.0"
   }
 }
